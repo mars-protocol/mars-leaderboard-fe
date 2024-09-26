@@ -5,19 +5,19 @@ import Liquidations from 'components/main/Leaderboard/LeaderboardTable/Liquidati
 import ProjectedWinners from 'components/main/Leaderboard/LeaderboardTable/ProjectedWinners'
 import useTopTraderColumn from './LeaderboardTable/useTopTradersColumn'
 import useProjectedWinnersColumn from './LeaderboardTable/useProjectedWinnersColumn'
-import useLiquidationsColumn from './LeaderboardTable/useLiquidationsColumn'
-import { achievements, topLiquidations, topTraders } from 'components/main/Leaderboard/data'
+import useLiquidationsColumn from 'components/main/Leaderboard/LeaderboardTable/useLiquidationsColumn'
+import { achievements, topLiquidations } from 'components/main/Leaderboard/data'
 import useTopTraders from 'hooks/leaderboard/useTopTraders'
 
 export default function LeaderboardTable() {
-  const { data: topTradersData } = useTopTraders()
-  console.log(topTradersData, 'topTradersData')
+  const { data: topTradersData, isLoading } = useTopTraders()
   const topTradersColumns = useTopTraderColumn(topTradersData)
   const projectedWinnersColumns = useProjectedWinnersColumn()
   const liquidationsColumns = useLiquidationsColumn()
 
-  const tabs: CardTab[] = useMemo(
-    () => [
+  const tabs: CardTab[] = useMemo(() => {
+    if (!topTradersData || isLoading) return []
+    return [
       {
         title: 'Top Traders',
         renderContent: () => (
@@ -40,9 +40,10 @@ export default function LeaderboardTable() {
           />
         ),
       },
-    ],
-    [],
-  )
+    ]
+  }, [topTradersData, isLoading, topTradersColumns, projectedWinnersColumns, liquidationsColumns])
+
+  if (tabs.length === 0) return null
 
   return <CardWithTabs tabs={tabs} />
 }

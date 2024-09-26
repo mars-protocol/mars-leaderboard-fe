@@ -78,7 +78,7 @@ export default function DisplayCurrency(props: Props) {
   const prefix = useMemo(() => {
     let positiveOrNegativePrefix = ''
     if (amount && amount > 0 && showSignPrefix) positiveOrNegativePrefix = '+'
-    if (amount && amount > 0 && showSignPrefix) positiveOrNegativePrefix = '-'
+    if (amount && amount < 0 && showSignPrefix) positiveOrNegativePrefix = '-'
     const approximationPrefix = isApproximation ? '~ ' : ''
     const smallerThanPrefix = isLessThanACent && !showDetailedPrice && !showZero ? '< ' : ''
 
@@ -96,7 +96,7 @@ export default function DisplayCurrency(props: Props) {
       <Text tag='div' className={classNames(className, 'flex flex-wrap justify-end items-center')}>
         N/A
         <Tooltip
-          content='There is currently no price source available for this Asset'
+          content='There is currently no price source availible for this Asset'
           type='info'
           className='ml-1'
         >
@@ -104,7 +104,6 @@ export default function DisplayCurrency(props: Props) {
         </Tooltip>
       </Text>
     )
-
   return (
     <FormattedNumber
       className={classNames(

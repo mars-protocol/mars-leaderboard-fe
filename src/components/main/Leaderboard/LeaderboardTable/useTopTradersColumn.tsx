@@ -5,7 +5,9 @@ import Position, {
 } from 'components/main/Leaderboard/LeaderboardTable/common/Position'
 import Account from 'components/main/Leaderboard/LeaderboardTable/common/Account'
 import DisplayCurrency from 'components/common/DisplayCurrency'
-import { FormattedNumber } from 'components/common/FormattedNumber'
+import { BNCoin } from 'types/classes/BNCoin'
+import { BN } from 'utils/helpers'
+import { PRICE_ORACLE_DECIMALS } from 'constants/query'
 
 export default function useTopTraderColumns(data: TopTradersData[]) {
   return useMemo<ColumnDef<TopTradersData>[]>(() => {
@@ -21,7 +23,7 @@ export default function useTopTraderColumns(data: TopTradersData[]) {
         header: 'Account ID',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={'trader1' as string} />
+          return <Account value={'trader 1' as string} />
         },
       },
       {
@@ -36,12 +38,16 @@ export default function useTopTraderColumns(data: TopTradersData[]) {
         accessorKey: 'total_pnl',
         header: 'Profit & Loss (PnL)',
         cell: ({ row }) => {
-          const pnlValue = parseFloat(row.original.total_pnl)
           return (
-            <FormattedNumber
-              amount={pnlValue}
-              options={{ abbreviated: true, maxDecimals: 2, prefix: '$' }}
-              animate
+            <DisplayCurrency
+              coin={BNCoin.fromDenomAndBigNumber(
+                'usd',
+                BN(row.original.total_pnl).shiftedBy(-PRICE_ORACLE_DECIMALS),
+              )}
+              options={{
+                abbreviated: false,
+              }}
+              showSignPrefix
             />
           )
         },

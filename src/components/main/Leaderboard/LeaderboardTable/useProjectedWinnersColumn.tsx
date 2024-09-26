@@ -1,8 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { useMemo } from 'react'
-import Position, {
-  POSITION_META,
-} from 'components/main/Leaderboard/LeaderboardTable/common/Position'
 import Account from 'components/main/Leaderboard/LeaderboardTable/common/Account'
 
 export default function useProjectedWinnersColumn() {

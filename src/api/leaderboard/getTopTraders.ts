@@ -1,4 +1,4 @@
-export default async function getTopTraders(page = 1, pageSize = 6) {
+export default async function getTopTraders(page = 1, pageSize = 15) {
   try {
     const offset = (page - 1) * pageSize
     const response = await fetch(
