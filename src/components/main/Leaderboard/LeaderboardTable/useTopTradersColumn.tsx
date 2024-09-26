@@ -40,7 +40,6 @@ export default function useTopTraderColumns(data: TopTradersData[]) {
           return (
             <FormattedNumber
               amount={pnlValue}
-              
               options={{ abbreviated: true, maxDecimals: 2, prefix: '$' }}
               animate
             />
