@@ -63,7 +63,7 @@ export default function LiquidationsMetrics() {
           <GridPlanet />
         </div>
       }
-      title='LIQUIDATION DATA'
+      title='LEADERBOARD'
       copy='Explore the Mars Protocol Liquidation Dashboard to track performance metrics.'
       metrics={liquidationMetrics}
       isLoading={isLiquidityOverviewDataLoading}

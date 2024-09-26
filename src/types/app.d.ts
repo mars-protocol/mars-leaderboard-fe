@@ -1486,3 +1486,24 @@ interface Token {
   totalLiquidityUSD: number
   dayVolumeUSD: number
 }
+
+interface TopTradersData {
+  account_id: string
+  realized_pnl: string
+  unrealized_pnl: string
+  total_pnl: string
+  position: number
+}
+interface ProjectedWinnersData {
+  achievement: string
+  metric: string
+  description: string
+  reward: string
+}
+interface LiquidationsData {
+  position: number
+  trader: string
+  account_id: string
+  number_liquidations: string
+  amount_liquidations: string
+}
