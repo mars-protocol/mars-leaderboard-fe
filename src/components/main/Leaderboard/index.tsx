@@ -1,6 +1,6 @@
 import Text from 'components/common/Text'
 import { Reward } from 'components/common/Icons'
-import LeaderboardTable from './LeaderboardTable'
+import LeaderboardTable from 'components/main/Leaderboard/LeaderboardTable'
 import Card from 'components/common/Card'
 
 export default function Leaderboard() {

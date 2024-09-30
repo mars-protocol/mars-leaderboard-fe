@@ -1493,6 +1493,7 @@ interface TopTradersData {
   unrealized_pnl: string
   total_pnl: string
   position: number
+  trader: string
 }
 interface ProjectedWinnersData {
   achievement: string
@@ -1505,5 +1506,6 @@ interface LiquidationsData {
   trader: string
   account_id: string
   number_liquidations: string
-  amount_liquidations: string
+  total_liquidated_amount: string
+  // denom: string
 }

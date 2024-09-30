@@ -1,16 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { useMemo } from 'react'
-import Position, {
-  POSITION_META,
-} from 'components/main/Leaderboard/LeaderboardTable/common/Position'
-import Account from 'components/main/Leaderboard/LeaderboardTable/common/Account'
+import Account from 'components/main/Leaderboard/table/common/Account'
+import Position, { POSITION_META } from 'components/main/Leaderboard/table/common/Position'
 import DisplayCurrency from 'components/common/DisplayCurrency'
 import { BNCoin } from 'types/classes/BNCoin'
 import { BN } from 'utils/helpers'
-import { PRICE_ORACLE_DECIMALS } from 'constants/query'
 
-export default function useTopTraderColumns(data: TopTradersData[]) {
-  return useMemo<ColumnDef<TopTradersData>[]>(() => {
+export default function useLiquidationsColumn() {
+  return useMemo<ColumnDef<LiquidationsData>[]>(() => {
     return [
       {
         ...POSITION_META,
@@ -20,10 +17,10 @@ export default function useTopTraderColumns(data: TopTradersData[]) {
       },
       {
         accessorKey: 'trader',
-        header: 'Account ID',
+        header: 'Trader',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={'trader 1' as string} />
+          return <Account value={row.original.trader as string} />
         },
       },
       {
@@ -35,21 +32,26 @@ export default function useTopTraderColumns(data: TopTradersData[]) {
         },
       },
       {
-        accessorKey: 'total_pnl',
-        header: 'Profit & Loss (PnL)',
+        accessorKey: 'liquidations',
+        header: '$ Liquidated',
         cell: ({ row }) => {
           return (
             <DisplayCurrency
-              coin={BNCoin.fromDenomAndBigNumber(
-                'usd',
-                BN(row.original.total_pnl).shiftedBy(-PRICE_ORACLE_DECIMALS),
-              )}
+              coin={BNCoin.fromDenomAndBigNumber('usd', BN(row.original.total_liquidated_amount))}
               options={{
                 abbreviated: false,
               }}
               showSignPrefix
             />
           )
+        },
+      },
+      {
+        accessorKey: 'amount_of_liquidations',
+        header: 'Number of Liquidations',
+        meta: { className: 'max-w-20' },
+        cell: ({ row }) => {
+          return <Account value={row.original.number_liquidations as string} />
         },
       },
     ]

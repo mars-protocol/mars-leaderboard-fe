@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import Table from 'components/common/Table'
-import Pagination from 'components/main/Leaderboard/LeaderboardTable/Pagination'
+import Pagination from 'components/main/Leaderboard/table/Pagination'
 
 interface Props {
   columns: ColumnDef<TopTradersData>[]

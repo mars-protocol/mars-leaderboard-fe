@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { useMemo } from 'react'
-import Account from 'components/main/Leaderboard/LeaderboardTable/common/Account'
+import Account from 'components/main/Leaderboard/table/common/Account'
 
 export default function useProjectedWinnersColumn() {
   return useMemo<ColumnDef<ProjectedWinnersData>[]>(() => {

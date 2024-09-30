@@ -8,6 +8,7 @@ export default async function getTopTraders(page = 1, pageSize = 15) {
     const processedData = data.data.map((item: any, index: number) => ({
       ...item,
       position: offset + index + 1,
+      trader: `Trader ${item.account_id}`,
     }))
     return processedData
   } catch (error) {
