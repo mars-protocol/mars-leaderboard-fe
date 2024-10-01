@@ -1,4 +1,4 @@
-export default async function getLiquidations(page = 1, pageSize = 15) {
+export default async function getTradersLiquidations(page = 1, pageSize = 15) {
   try {
     const offset = (page - 1) * pageSize
     const response = await fetch(
@@ -27,7 +27,6 @@ export default async function getLiquidations(page = 1, pageSize = 15) {
       }
     })
 
-    console.log(processedData, 'processedData')
     return processedData
   } catch (error) {
     console.error('Could not fetch liquidations data.', error)

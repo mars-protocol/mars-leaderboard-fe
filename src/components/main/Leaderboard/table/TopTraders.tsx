@@ -13,12 +13,16 @@ export default function TopTraders(props: Props) {
   const { columns, isLoading, data } = props
 
   const [page, setPage] = useState<number>(1)
-  const pageSize = 15
-  const maxEntries = 100
-  const totalPages = Math.ceil(maxEntries / pageSize)
+  const pageSize = 6
+  const totalEntries = data?.length || 0
+  const totalPages = Math.ceil(totalEntries / pageSize)
+
+  const currentData = data ? data.slice((page - 1) * pageSize, page * pageSize) : []
 
   const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages) return
     setPage(newPage)
+    console.log('Page changed to:', newPage)
   }
 
   return (
@@ -26,12 +30,12 @@ export default function TopTraders(props: Props) {
       <Table
         title='Top Traders'
         columns={columns}
-        data={data}
+        data={currentData}
         tableBodyClassName='text-lg '
         initialSorting={[]}
         hideCard
       />
-      {data.length > pageSize && (
+      {totalPages > 1 && (
         <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
       )}
     </>

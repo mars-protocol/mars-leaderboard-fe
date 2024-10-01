@@ -6,15 +6,14 @@ import ProjectedWinners from 'components/main/Leaderboard/table/ProjectedWinners
 import useTopTraderColumn from 'components/main/Leaderboard/table/useTopTradersColumn'
 import useProjectedWinnersColumn from 'components/main/Leaderboard/table/useProjectedWinnersColumn'
 import useLiquidationsColumn from 'components/main/Leaderboard/table/useLiquidationsColumn'
-import { achievements, topLiquidations } from 'components/main/Leaderboard/data'
+import { achievements } from 'components/main/Leaderboard/data'
 import useTopTraders from 'hooks/leaderboard/useTopTraders'
-import useLiquidations from 'hooks/leaderboard/useLiquidations'
+import useTradersLiquidations from 'hooks/leaderboard/useTradersLiquidations'
 
 export default function LeaderboardTable() {
   const { data: topTradersData, isLoading: isTopTradersLoading } = useTopTraders()
-  const { data: topLiquidationsData, isLoading: isLiquidationsLoading } = useLiquidations()
-
-  console.log(topLiquidationsData, 'topLiquidationsDatatopLiquidationsDatatopLiquidationsData')
+  const { data: topTradersLiquidationsData, isLoading: isTradersLiquidationsLoading } =
+    useTradersLiquidations()
 
   const topTradersColumns = useTopTraderColumn(topTradersData)
   const projectedWinnersColumns = useProjectedWinnersColumn()
@@ -34,7 +33,7 @@ export default function LeaderboardTable() {
         renderContent: () => (
           <Liquidations
             columns={liquidationsColumns}
-            data={topLiquidationsData}
+            data={topTradersLiquidationsData}
             isLoading={false}
           />
         ),
@@ -56,7 +55,7 @@ export default function LeaderboardTable() {
     topTradersColumns,
     projectedWinnersColumns,
     liquidationsColumns,
-    topLiquidationsData,
+    topTradersLiquidationsData,
   ])
 
   if (!tabs.length) return null
