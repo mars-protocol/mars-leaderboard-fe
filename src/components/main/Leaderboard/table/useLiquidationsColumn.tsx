@@ -42,13 +42,14 @@ export default function useLiquidationsColumn() {
                 abbreviated: false,
               }}
               showSignPrefix
+              className='text-xs'
             />
           )
         },
       },
       {
         accessorKey: 'amount_of_liquidations',
-        header: 'Number of Liquidations',
+        header: '# Liquidations',
         meta: { className: 'max-w-20' },
         cell: ({ row }) => {
           return <Account value={row.original.number_liquidations as string} />

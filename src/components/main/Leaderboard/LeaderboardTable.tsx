@@ -15,7 +15,7 @@ export default function LeaderboardTable() {
   const { data: topTradersLiquidationsData, isLoading: isTradersLiquidationsLoading } =
     useTradersLiquidations()
 
-  const topTradersColumns = useTopTraderColumn(topTradersData)
+  const topTradersColumns = useTopTraderColumn()
   const projectedWinnersColumns = useProjectedWinnersColumn()
   const liquidationsColumns = useLiquidationsColumn()
 
@@ -60,5 +60,5 @@ export default function LeaderboardTable() {
 
   if (!tabs.length) return null
 
-  return <CardWithTabs tabs={tabs} />
+  return <CardWithTabs tabs={tabs} className='text-xs' />
 }

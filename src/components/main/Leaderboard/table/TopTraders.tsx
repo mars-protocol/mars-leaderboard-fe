@@ -31,7 +31,7 @@ export default function TopTraders(props: Props) {
         title='Top Traders'
         columns={columns}
         data={currentData}
-        tableBodyClassName='text-lg '
+        tableBodyClassName='text-xs'
         initialSorting={[]}
         hideCard
       />

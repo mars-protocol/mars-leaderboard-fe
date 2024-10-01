@@ -16,7 +16,7 @@ export default function Account(props: Props) {
 
   return (
     <div className='flex items-center justify-end'>
-      <Text size='sm'>{value}</Text>
+      <Text size='xs'>{value}</Text>
     </div>
   )
 }

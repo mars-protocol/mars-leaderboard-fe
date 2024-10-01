@@ -7,7 +7,7 @@ import { BNCoin } from 'types/classes/BNCoin'
 import { BN } from 'utils/helpers'
 import { PRICE_ORACLE_DECIMALS } from 'constants/query'
 
-export default function useTopTraderColumns(data: TopTradersData[]) {
+export default function useTopTraderColumns() {
   return useMemo<ColumnDef<TopTradersData>[]>(() => {
     return [
       {
@@ -46,6 +46,7 @@ export default function useTopTraderColumns(data: TopTradersData[]) {
                 abbreviated: false,
               }}
               showSignPrefix
+              className='text-xs'
             />
           )
         },
