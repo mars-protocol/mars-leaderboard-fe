@@ -1,12 +1,5 @@
 import Text from 'components/common/Text'
 
-export const ACCOUNT_META = {
-  id: 'account_id',
-  header: 'Account ID',
-  accessorKey: 'account_id',
-  meta: { className: 'max-w-30' },
-}
-
 interface Props {
   value: string
 }

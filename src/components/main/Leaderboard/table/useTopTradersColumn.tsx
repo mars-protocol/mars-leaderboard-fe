@@ -13,7 +13,7 @@ export default function useTopTraderColumns() {
       {
         ...POSITION_META,
         cell: ({ row }) => {
-          return <Position value={row.original.position as number} />
+          return <Position value={row.original.position} />
         },
       },
       {
@@ -21,7 +21,7 @@ export default function useTopTraderColumns() {
         header: 'Trader',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.trader as string} />
+          return <Account value={row.original.trader} />
         },
       },
       {
@@ -29,7 +29,7 @@ export default function useTopTraderColumns() {
         header: 'Account ID',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.account_id as string} />
+          return <Account value={row.original.account_id} />
         },
       },
       {

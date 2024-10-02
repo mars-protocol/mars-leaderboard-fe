@@ -7,58 +7,32 @@ import useTopTraderColumn from 'components/main/Leaderboard/table/useTopTradersC
 import useProjectedWinnersColumn from 'components/main/Leaderboard/table/useProjectedWinnersColumn'
 import useLiquidationsColumn from 'components/main/Leaderboard/table/useLiquidationsColumn'
 import { achievements } from 'components/main/Leaderboard/data'
-import useTopTraders from 'hooks/leaderboard/useTopTraders'
-import useTradersLiquidations from 'hooks/leaderboard/useTradersLiquidations'
 
 export default function LeaderboardTable() {
-  const { data: topTradersData, isLoading: isTopTradersLoading } = useTopTraders()
-  const { data: topTradersLiquidationsData, isLoading: isTradersLiquidationsLoading } =
-    useTradersLiquidations()
-
   const topTradersColumns = useTopTraderColumn()
   const projectedWinnersColumns = useProjectedWinnersColumn()
   const liquidationsColumns = useLiquidationsColumn()
 
   const tabs: CardTab[] = useMemo(() => {
-    if (!topTradersData || isTopTradersLoading) return []
     return [
       {
         title: 'Top Traders',
-        renderContent: () => (
-          <TopTraders columns={topTradersColumns} data={topTradersData} isLoading={false} />
-        ),
+        renderContent: () => <TopTraders columns={topTradersColumns} />,
       },
       {
         title: 'Liquidations',
-        renderContent: () => (
-          <Liquidations
-            columns={liquidationsColumns}
-            data={topTradersLiquidationsData}
-            isLoading={false}
-          />
-        ),
+        renderContent: () => <Liquidations columns={liquidationsColumns} />,
       },
       {
         title: 'Projected Winners',
         renderContent: () => (
-          <ProjectedWinners
-            columns={projectedWinnersColumns}
-            data={achievements}
-            isLoading={false}
-          />
+          <ProjectedWinners columns={projectedWinnersColumns} data={achievements} />
         ),
       },
     ]
-  }, [
-    topTradersData,
-    isTopTradersLoading,
-    topTradersColumns,
-    projectedWinnersColumns,
-    liquidationsColumns,
-    topTradersLiquidationsData,
-  ])
+  }, [topTradersColumns, projectedWinnersColumns, liquidationsColumns])
 
   if (!tabs.length) return null
 
-  return <CardWithTabs tabs={tabs} className='text-xs' />
+  return <CardWithTabs tabs={tabs} className='text-xs h-90' />
 }

@@ -5,6 +5,7 @@ import Position, { POSITION_META } from 'components/main/Leaderboard/table/commo
 import DisplayCurrency from 'components/common/DisplayCurrency'
 import { BNCoin } from 'types/classes/BNCoin'
 import { BN } from 'utils/helpers'
+import { FormattedNumber } from 'components/common/FormattedNumber'
 
 export default function useLiquidationsColumn() {
   return useMemo<ColumnDef<LiquidationsData>[]>(() => {
@@ -20,7 +21,7 @@ export default function useLiquidationsColumn() {
         header: 'Trader',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.trader as string} />
+          return <Account value={row.original.trader} />
         },
       },
       {
@@ -28,7 +29,7 @@ export default function useLiquidationsColumn() {
         header: 'Account ID',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.account_id as string} />
+          return <Account value={row.original.account_id} />
         },
       },
       {
@@ -52,7 +53,17 @@ export default function useLiquidationsColumn() {
         header: '# Liquidations',
         meta: { className: 'max-w-20' },
         cell: ({ row }) => {
-          return <Account value={row.original.number_liquidations as string} />
+          const amount = Number(row.original.number_liquidations)
+          return (
+            <FormattedNumber
+              amount={amount}
+              animate
+              options={{
+                minDecimals: 0,
+                maxDecimals: 0,
+              }}
+            />
+          )
         },
       },
     ]
