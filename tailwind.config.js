@@ -71,6 +71,9 @@ module.exports = {
         loaderFade: 'fadein 2s ease-in-out forwards',
         loaderGlow: 'vector 3s ease-in-out forwards',
       },
+      dropShadow: {
+        'white-glow': '5px 5px 9px rgba(255, 255, 255, 1)',
+      },
       backdropBlur: {
         sticky: '50px',
       },
