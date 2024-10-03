@@ -12,9 +12,6 @@ interface Props {
 
 export default function CompetitionRules(props: Props) {
   const { show, setShow, close } = props
-  const onClose = () => {
-    close()
-  }
 
   return (
     <Overlay
@@ -24,7 +21,7 @@ export default function CompetitionRules(props: Props) {
     >
       <div className='flex justify-between items-center p-4'>
         <Text size='xl'>Competition Rules</Text>
-        <EscButton onClick={onClose} enableKeyPress />
+        <EscButton onClick={() => close()} enableKeyPress />
       </div>
 
       <div className='flex flex-col gap-10 p-4'>

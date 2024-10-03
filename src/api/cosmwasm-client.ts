@@ -13,7 +13,7 @@ const _creditManagerQueryClient: Map<string, MarsCreditManagerQueryClient> = new
 const _oracleQueryClient: Map<string, MarsOracleOsmosisQueryClient> = new Map()
 const _paramsQueryClient: Map<string, MarsParamsQueryClient> = new Map()
 const _incentivesQueryClient: Map<string, MarsIncentivesQueryClient> = new Map()
-/* PERPS
+/* PERPS 
 let _perpsClient: Map<string, MarsPerpsQueryClient> = new Map()
 */
 const _redBankQueryClient: Map<string, MarsRedBankQueryClient> = new Map()

@@ -7,7 +7,6 @@ export default async function getTopTraders(page: number) {
     const data = await response.json()
     const offset = (page - 1) * limit
 
-    console.log(data, 'data')
     const processedData = data.data.map((item: any, index: number) => ({
       ...item,
       position: offset + index + 1,

@@ -1437,3 +1437,12 @@ interface LiquidationsData {
   number_liquidations: string
   total_liquidated_amount: string
 }
+interface LiquidationAccount {
+  liquidatee_account_id: number
+  liquidation_count: number
+}
+
+interface LiquidationAmount {
+  liquidatee_account_id: number
+  total_liquidated_amount: string
+}

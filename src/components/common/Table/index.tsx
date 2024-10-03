@@ -113,7 +113,7 @@ export default function Table<T>(props: Props<T>) {
                       {header.column.getCanSort() && (
                         <span
                           className={classNames(
-                            'w-5 h- my-auto text-white',
+                            'w-5 h-5 my-auto text-white',
                             !LEFT_ALIGNED_ROWS.includes(header.id) &&
                               'absolute -mr-4.5 -translate-y-1/2 top-1/2',
                           )}

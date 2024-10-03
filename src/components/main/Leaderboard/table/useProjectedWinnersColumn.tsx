@@ -10,7 +10,7 @@ export default function useProjectedWinnersColumn() {
         header: 'Metric',
         meta: { className: 'max-w-20' },
         cell: ({ row }) => {
-          return <Account value={row.original.metric as string} />
+          return <Account value={row.original.metric} />
         },
       },
       {
@@ -18,7 +18,7 @@ export default function useProjectedWinnersColumn() {
         header: 'Achievement',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.achievement as string} />
+          return <Account value={row.original.achievement} />
         },
       },
       {
@@ -26,7 +26,7 @@ export default function useProjectedWinnersColumn() {
         header: 'Description',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.description as string} />
+          return <Account value={row.original.description} />
         },
       },
       {
@@ -34,7 +34,7 @@ export default function useProjectedWinnersColumn() {
         header: 'Reward',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.reward as string} />
+          return <Account value={row.original.reward} />
         },
       },
     ]

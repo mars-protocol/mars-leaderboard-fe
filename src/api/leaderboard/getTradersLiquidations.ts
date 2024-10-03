@@ -1,4 +1,4 @@
-export default async function getTradersLiquidations(page = 1, pageSize = 15) {
+export default async function getTradersLiquidations(page = 1, pageSize = 6) {
   try {
     const offset = (page - 1) * pageSize
     const response = await fetch(
@@ -9,13 +9,11 @@ export default async function getTradersLiquidations(page = 1, pageSize = 15) {
     const accountsData = data.data[0].top_liquidated_accounts
     const amountsData = data.data[0].top_liquidated_amounts
 
-    const amountMap = new Map()
-    amountsData.forEach((amountItem: any) => {
-      amountMap.set(amountItem.liquidatee_account_id, amountItem)
-    })
-
-    const processedData = accountsData.map((accountItem: any, index: number) => {
-      const amountItem = amountMap.get(accountItem.liquidatee_account_id)
+    const processedData = accountsData.map((accountItem: LiquidationAccount, index: number) => {
+      const amountItem = amountsData.find(
+        (item: LiquidationAccount) =>
+          item.liquidatee_account_id === accountItem.liquidatee_account_id,
+      )
 
       return {
         position: offset + index + 1,
@@ -23,7 +21,6 @@ export default async function getTradersLiquidations(page = 1, pageSize = 15) {
         number_liquidations: accountItem.liquidation_count,
         total_liquidated_amount: amountItem ? amountItem.total_liquidated_amount : '0',
         trader: `Trader ${accountItem.liquidatee_account_id}`,
-        // denom: amountItem.liquidation_datas[0].liquidated_denom,
       }
     })
 

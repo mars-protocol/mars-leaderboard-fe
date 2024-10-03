@@ -22,7 +22,14 @@ export default function Liquidations(props: Props) {
           </Text>
         </div>
       ) : (
-        <Table title='Liquidations' columns={columns} data={data} initialSorting={[]} hideCard />
+        <Table
+          title='Liquidations'
+          columns={columns}
+          data={data}
+          spacingClassName='px-2 md:px-4 py-2'
+          initialSorting={[]}
+          hideCard
+        />
       )}
     </>
   )

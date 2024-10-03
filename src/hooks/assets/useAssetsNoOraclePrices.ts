@@ -40,7 +40,7 @@ async function fetchSortAndMapAllAssets(
   chainConfig: ChainConfig,
   assetParams: AssetParamsBaseForAddr[],
   /* PERPS
-  perpsParams: PerpParams[],
+  perpsParams: PerpParams[], 
   */
 ) {
   const [assets, pools] = await Promise.all([getDexAssets(chainConfig), getDexPools(chainConfig)])
@@ -92,7 +92,7 @@ async function fetchSortAndMapAllAssets(
     }
 
     /* PERPS
-    const currentAssetPerpsParams = perpsParams ? perpsParams.find(byDenom(asset.denom)) : undefined
+    const currentAssetPerpsParams = perpsParams ? perpsParams.find(byDenom(asset.denom)) : undefined 
     */
 
     const isDepositEnabled = chainConfig.anyAsset

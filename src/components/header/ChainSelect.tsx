@@ -9,13 +9,13 @@ import { ChevronDown, Cross } from 'components/common/Icons'
 import Overlay from 'components/common/Overlay'
 import Radio from 'components/common/Radio'
 import Text from 'components/common/Text'
+import ChainLogo from 'components/common/chain/ChainLogo'
 import useChainConfig from 'hooks/chain/useChainConfig'
 import useToggle from 'hooks/common/useToggle'
 import useCurrentChainId from 'hooks/localStorage/useCurrentChainId'
 import useStore from 'store'
 import { ChainInfoID, NETWORK } from 'types/enums'
 import { getRoute } from 'utils/route'
-import ChainLogo from 'components/common/chain/ChainLogo'
 
 interface Props {
   className?: string
