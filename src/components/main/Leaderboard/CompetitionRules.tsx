@@ -18,7 +18,7 @@ export default function CompetitionRules(props: Props) {
 
   return (
     <Overlay
-      className='top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-screen-full h-[calc(100dvh-200px)] md:w-120 md:h-100 overflow-hidden px-4 py-5'
+      className='top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-screen-full h-[calc(100dvh-400px)] md:w-120 md:h-100 overflow-hidden px-4 py-5'
       show={show}
       setShow={setShow}
     >
