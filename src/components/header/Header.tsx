@@ -10,7 +10,7 @@ import MobileNavigationToggle from 'components/header/navigation/mobile/MobileNa
 const menuTree = (): MenuTreeEntry[] => [
   {
     pages: ['main'],
-    label: 'leaderboard',
+    label: '',
   },
 ]
 
