@@ -8,7 +8,7 @@ export default function LeaderboardIntro() {
     <Card className='w-full p-4 bg-white/5 mb-4'>
       <div className='flex flex-col md:flex-row justify-evenly items-center'>
         <FeatureCard
-          title={'Trade & Climb Leaderboards'}
+          title={'Join Competition'}
           description={
             'Read the competition rules before you join. You will receive $10,000 in testnet funds.'
           }
@@ -30,7 +30,7 @@ export default function LeaderboardIntro() {
         <Divider orientation='horizontal' className='my-4 block md:hidden' />
 
         <FeatureCard
-          title={'Trade & Climb Leaderboards'}
+          title={'Get Rewarded'}
           description={
             'Read the competition rules before you join. You will receive $10,000 in testnet funds.'
           }

@@ -24,35 +24,39 @@ export default function TopTraders(props: Props) {
     setPage(newPage)
   }
 
+  if (isLoading || !topTradersData) {
+    return (
+      <div className='flex flex-wrap justify-center w-full gap-4 mt-4'>
+        {isLoading ? (
+          <>
+            <CircularProgress size={30} />
+            <Text className='w-full text-center' size='sm'>
+              Fetching data...
+            </Text>
+          </>
+        ) : (
+          <Text className='w-full text-center' size='sm'>
+            No trading data available.
+          </Text>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col h-75'>
-      {!topTradersData || isLoading ? (
-        <div className='flex flex-wrap justify-center w-full gap-4 mt-4'>
-          <CircularProgress size={30} />
-          <Text className='w-full text-center' size='sm'>
-            Fetching data...
-          </Text>
+      <Table
+        title='Top Traders'
+        columns={columns}
+        data={topTradersData.data}
+        tableBodyClassName='text-xs'
+        initialSorting={[]}
+        hideCard
+      />
+      {totalPages > 1 && (
+        <div className='mt-auto'>
+          <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
         </div>
-      ) : (
-        <>
-          <Table
-            title='Top Traders'
-            columns={columns}
-            data={topTradersData.data}
-            tableBodyClassName='text-xs'
-            initialSorting={[]}
-            hideCard
-          />
-          {totalPages > 1 && (
-            <div className='mt-auto'>
-              <Pagination
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
-          )}
-        </>
       )}
     </div>
   )

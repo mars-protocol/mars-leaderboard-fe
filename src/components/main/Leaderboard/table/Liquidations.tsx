@@ -12,25 +12,33 @@ export default function Liquidations(props: Props) {
 
   const { data, isLoading } = useTradersLiquidations()
 
-  return (
-    <>
-      {!data || isLoading ? (
-        <div className='flex flex-wrap justify-center w-full gap-4 mt-4'>
-          <CircularProgress size={30} />
+  if (isLoading || !data || data.length === 0) {
+    return (
+      <div className='flex flex-wrap justify-center w-full gap-4 mt-4'>
+        {isLoading ? (
+          <>
+            <CircularProgress size={30} />
+            <Text className='w-full text-center' size='sm'>
+              Fetching data...
+            </Text>
+          </>
+        ) : (
           <Text className='w-full text-center' size='sm'>
-            Fetching data...
+            No liquidations data available.
           </Text>
-        </div>
-      ) : (
-        <Table
-          title='Liquidations'
-          columns={columns}
-          data={data}
-          spacingClassName='px-2 md:px-4 py-2'
-          initialSorting={[]}
-          hideCard
-        />
-      )}
-    </>
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <Table
+      title='Liquidations'
+      columns={columns}
+      data={data}
+      spacingClassName='px-2 md:px-4 py-2'
+      initialSorting={[]}
+      hideCard
+    />
   )
 }
