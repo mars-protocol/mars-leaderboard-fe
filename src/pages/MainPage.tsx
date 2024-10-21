@@ -1,15 +1,11 @@
-import StatsMetrics from 'components/main/overview/StatsMetrics'
-import TokenMetrics from 'components/main/overview/TokenMetrics'
-import DropdownChart from 'components/main/overview/Chart/DropdownChart'
-import TabChart from 'components/main/overview/Chart/TabChart'
+import Leaderboard from 'components/main/Leaderboard/index'
+import LeaderboardIntro from 'components/main/Leaderboard/LeaderboardIntro'
 
 export default function MainPage() {
   return (
-    <div className='flex w-full flex-wrap'>
-      <StatsMetrics />
-      <TokenMetrics />
-      <TabChart />
-      <DropdownChart className='mt-10 w-full' />
+    <div className='w-full'>
+      <LeaderboardIntro />
+      <Leaderboard />
     </div>
   )
 }

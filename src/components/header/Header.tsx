@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { isMobile } from 'react-device-detect'
 
 import { Logo } from 'components/common/Icons'
-import ChainSelect from 'components/header/ChainSelect'
 import DesktopNavigation from 'components/header/navigation/desktop/DesktopNavigation'
 import { NavLink } from 'components/header/navigation/desktop/NavLink'
 import MobileNavigation from 'components/header/navigation/mobile/MobileNavigation'
@@ -11,11 +10,7 @@ import MobileNavigationToggle from 'components/header/navigation/mobile/MobileNa
 const menuTree = (): MenuTreeEntry[] => [
   {
     pages: ['main'],
-    label: 'Home',
-  },
-  {
-    pages: ['liquidations'],
-    label: 'Liquidations',
+    label: '',
   },
 ]
 
@@ -38,7 +33,6 @@ export default function Header() {
             {!isMobile && <DesktopNavigation menuTree={menuTree} />}
           </div>
           <div className='flex gap-4'>
-            {!isMobile && <ChainSelect className='hidden md:flex' />}
             {isMobile && <MobileNavigationToggle className='md:hidden' />}
           </div>
         </div>

@@ -67,7 +67,7 @@ export default function Row<T>(props: Props<T>) {
               className={classNames(
                 'text-sm',
                 LEFT_ALIGNED_ROWS.includes(cell.column.id) ? 'text-left' : 'text-right',
-                spacingClassName ?? 'px-3 py-4',
+                spacingClassName ?? 'px-3 py-3',
                 type &&
                   type !== 'strategies' &&
                   LEFT_ALIGNED_ROWS.includes(cell.column.id) &&

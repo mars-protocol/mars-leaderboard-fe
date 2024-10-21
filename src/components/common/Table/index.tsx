@@ -80,7 +80,7 @@ export default function Table<T>(props: Props<T>) {
         </Card>
       )}
     >
-      <table className={classNames('w-full', props?.tableBodyClassName)}>
+      <table className={classNames('w-full', tableBodyClassName)}>
         <thead className='border-b bg-black/20 border-white/10'>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -90,7 +90,7 @@ export default function Table<T>(props: Props<T>) {
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
                     className={classNames(
-                      spacingClassName ?? 'px-4 py-3',
+                      spacingClassName ?? 'px-4 py-2',
                       header.column.getCanSort() && 'hover:cursor-pointer',
                       LEFT_ALIGNED_ROWS.includes(header.id) ? 'text-left' : 'text-right',
                       header.column.columnDef.meta?.className,
@@ -105,7 +105,7 @@ export default function Table<T>(props: Props<T>) {
                     >
                       <Text
                         tag='span'
-                        size='xs'
+                        size='2xs'
                         className='flex items-center font-normal text-white/60'
                       >
                         {flexRender(header.column.columnDef.header, header.getContext())}

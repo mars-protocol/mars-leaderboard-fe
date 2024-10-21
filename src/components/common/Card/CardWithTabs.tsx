@@ -35,7 +35,7 @@ type TabsProps = {
 function Tabs(props: TabsProps) {
   const { tabs, activeIdx, onChange } = props
   return (
-    <div className='flex gap-6 items-center w-full font-semibold bg-white/10 px-4'>
+    <div className='flex gap-6 items-center w-full font-semibold bg-white/5 px-4'>
       {tabs.map((tab, index) => {
         return (
           <button
