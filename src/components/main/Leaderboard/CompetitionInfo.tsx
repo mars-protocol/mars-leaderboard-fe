@@ -1,8 +1,8 @@
 import Button from 'components/common/Button'
 import { InfoCircle } from 'components/common/Icons'
 import Text from 'components/common/Text'
-import { useState } from 'react'
 import CompetitionRules from 'components/main/Leaderboard/CompetitionRules'
+import { useState } from 'react'
 
 export default function CompetitonInfo() {
   const [showRulesModal, setShowRulesModal] = useState<boolean>(false)
@@ -16,13 +16,13 @@ export default function CompetitonInfo() {
   }
 
   return (
-    <div className='relative flex flex-col items-center justify-between md:h-full md:w-120 md:pt-8 gap-8'>
+    <div className='relative flex flex-col items-center justify-between gap-8 md:h-full md:w-120 md:pt-8'>
       <div className='absolute top-[-50px] w-full h-[100px] bg-gradient-to-b from-white to-transparent blur-2xl opacity-60' />
 
       <div className='flex flex-col items-center gap-3'>
         <Text
           size='5xl'
-          className='text-white font-bold tracking-wide drop-shadow-white-glow italic'
+          className='italic font-bold tracking-wide text-white drop-shadow-white-glow'
         >
           $ 10,000
         </Text>
@@ -31,7 +31,7 @@ export default function CompetitonInfo() {
           10 Aug 9PM UTC - 29 Nov 9PM UTC{' '}
         </Text>
 
-        <Text size='xs' className='text-white/40 text-center'>
+        <Text size='xs' className='text-center text-white/40'>
           Have the chance to win up to $10,000 USDC, competition starts soon!{' '}
         </Text>
       </div>
@@ -42,10 +42,10 @@ export default function CompetitonInfo() {
           text={'Join Competition'}
           onClick={(e) => {
             e.preventDefault()
-            window.open('https://tradingcompetition.marsprotocol.io/', '_blank')
+            window.open('https://perps.marsprotocol.io/', '_blank')
           }}
         />
-        <Text size='xs' className='text-white/40 text-center'>
+        <Text size='xs' className='text-center text-white/40'>
           Before joining, ensure you read the
           <span className='inline-block'>
             <Button
