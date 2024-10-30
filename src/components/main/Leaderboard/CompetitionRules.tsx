@@ -1,8 +1,8 @@
-import Text from 'components/common/Text'
-import Overlay from 'components/common/Overlay'
-import EscButton from 'components/common/Button/EscButton'
 import classNames from 'classnames'
+import EscButton from 'components/common/Button/EscButton'
 import { Circle } from 'components/common/Icons'
+import Overlay from 'components/common/Overlay'
+import Text from 'components/common/Text'
 
 interface Props {
   show: boolean
@@ -19,14 +19,14 @@ export default function CompetitionRules(props: Props) {
       show={show}
       setShow={setShow}
     >
-      <div className='flex justify-between items-center p-4'>
+      <div className='flex items-center justify-between p-4'>
         <Text size='xl'>Competition Rules</Text>
         <EscButton onClick={() => close()} enableKeyPress />
       </div>
 
       <div className='flex flex-col gap-10 p-4'>
         {COMPETITION_INFO_ITEMS.map((item, index) => (
-          <div key={index} className='flex gap-8 items-center'>
+          <div key={index} className='flex items-center gap-8'>
             <div
               className={classNames(
                 'rounded-sm relative h-10 w-10 p-2 bg-white/10 flex justify-center items-center flex-shrink-0',
@@ -57,12 +57,12 @@ export const COMPETITION_INFO_ITEMS = [
   },
   {
     icon: <Circle />,
-    title: 'Do not trade before 10 Oct 2024, 9PM UTC',
+    title: 'Do not trade before 1 Nov 2024, 8PM UTC',
     description: 'Your account will be disqualified if you trade before this date.',
   },
   {
     icon: <Circle />,
-    title: 'Trade until 29 Nov 2024 at 9PM UTC',
+    title: 'Trade until 6 Nov 2024 at 8PM UTC',
     description: 'Only perps trading will be considered for the competition.',
   },
 ]
