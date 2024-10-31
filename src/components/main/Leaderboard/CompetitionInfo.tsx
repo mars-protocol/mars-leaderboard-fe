@@ -24,7 +24,7 @@ export default function CompetitonInfo() {
           size='5xl'
           className='italic font-bold tracking-wide text-white drop-shadow-white-glow'
         >
-          $ 10,000
+          $4,000
         </Text>
         <Text className='text-white/80'>Trading Competition</Text>
         <Text size='xs' className='text-white/80'>
@@ -32,7 +32,7 @@ export default function CompetitonInfo() {
         </Text>
 
         <Text size='xs' className='text-center text-white/40'>
-          Have the chance to win up to $10,000 USDC, competition starts soon!{' '}
+          Have the chance to win up to $4,000 MARS, competition starts soon!{' '}
         </Text>
       </div>
       <div className='flex flex-col items-center gap-2 md:gap-6'>
