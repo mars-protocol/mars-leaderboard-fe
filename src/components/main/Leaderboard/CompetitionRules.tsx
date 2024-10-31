@@ -57,12 +57,12 @@ export const COMPETITION_INFO_ITEMS = [
   },
   {
     icon: <Circle />,
-    title: 'Do not trade before 1 Nov 2024, 8PM UTC',
+    title: 'Do not trade before 1 Nov 2024, 8am UTC',
     description: 'Your account will be disqualified if you trade before this date.',
   },
   {
     icon: <Circle />,
-    title: 'Trade until 6 Nov 2024 at 8PM UTC',
+    title: 'Trade until 4 Nov 2024, 8am UTC',
     description: 'Only perps trading will be considered for the competition.',
   },
 ]

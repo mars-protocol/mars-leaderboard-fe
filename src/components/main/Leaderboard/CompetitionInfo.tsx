@@ -28,7 +28,7 @@ export default function CompetitonInfo() {
         </Text>
         <Text className='text-white/80'>Trading Competition</Text>
         <Text size='xs' className='text-white/80'>
-          Oct 30, 8am UTC till Nov 6, 8am UTC{' '}
+          Nov 1, 8am UTC till Nov 4, 8am UTC{' '}
         </Text>
 
         <Text size='xs' className='text-center text-white/40'>

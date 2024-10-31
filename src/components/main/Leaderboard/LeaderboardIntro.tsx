@@ -20,9 +20,7 @@ export default function LeaderboardIntro() {
 
         <FeatureCard
           title={'Trade & Climb Leaderboards'}
-          description={
-            'Read the competition rules before you join. You will receive $10,000 in testnet funds.'
-          }
+          description={'Rise to the top by trading and securing your spot on the leaderboard.'}
           image={<Leaderboard />}
         />
 
@@ -32,7 +30,7 @@ export default function LeaderboardIntro() {
         <FeatureCard
           title={'Get Rewarded'}
           description={
-            'Read the competition rules before you join. You will receive $10,000 in testnet funds.'
+            'Compete, perform, and earn your rewards! Top traders will receive a share of the prize pool.'
           }
           image={<Reward />}
         />

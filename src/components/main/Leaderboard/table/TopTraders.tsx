@@ -24,7 +24,7 @@ export default function TopTraders(props: Props) {
     setPage(newPage)
   }
 
-  if (isLoading || !topTradersData) {
+  if (isLoading || !topTradersData || topTradersData.data.length === 0) {
     return (
       <div className='flex flex-wrap justify-center w-full gap-4 mt-4'>
         {isLoading ? (
