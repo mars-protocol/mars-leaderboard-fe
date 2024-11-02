@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { ColumnDef } from '@tanstack/react-table'
+import { useEffect, useState } from 'react'
+import { ColumnDef, SortingState } from '@tanstack/react-table'
 import Table from 'components/common/Table'
 import Pagination from 'components/main/Leaderboard/table/Pagination'
 import useTopTraders from 'hooks/leaderboard/useTopTraders'
@@ -13,9 +13,14 @@ interface Props {
 export default function TopTraders(props: Props) {
   const { columns } = props
   const [page, setPage] = useState<number>(1)
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'total_pnl', desc: true }])
+
   const pageSize = 6
 
-  const { data: topTradersData, isLoading } = useTopTraders(page)
+  const sortOrder = sorting[0]?.desc ? 'desc' : 'asc'
+  const sortField = sorting[0]?.id || 'total_pnl'
+
+  const { data: topTradersData, isLoading } = useTopTraders(page, sortOrder, sortField)
   const maxEntries = topTradersData?.total || 0
 
   const totalPages = Math.ceil(maxEntries / pageSize)
@@ -23,6 +28,10 @@ export default function TopTraders(props: Props) {
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
   }
+
+  useEffect(() => {
+    setPage(1)
+  }, [sorting])
 
   if (isLoading || !topTradersData || topTradersData.data.length === 0) {
     return (
@@ -50,7 +59,8 @@ export default function TopTraders(props: Props) {
         columns={columns}
         data={topTradersData.data}
         tableBodyClassName='text-xs'
-        initialSorting={[]}
+        initialSorting={sorting}
+        onSortingChange={setSorting}
         hideCard
       />
       {totalPages > 1 && (

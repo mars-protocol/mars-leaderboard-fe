@@ -7,11 +7,40 @@ import useTopTraderColumn from 'components/main/Leaderboard/table/useTopTradersC
 import useProjectedWinnersColumn from 'components/main/Leaderboard/table/useProjectedWinnersColumn'
 import useLiquidationsColumn from 'components/main/Leaderboard/table/useLiquidationsColumn'
 import { achievements } from 'components/main/Leaderboard/data'
+import useLiquidations from 'hooks/leaderboard/useTradersLiquidations'
+import useTop5Traders from 'hooks/leaderboard/useTop5Traders'
 
 export default function LeaderboardTable() {
   const topTradersColumns = useTopTraderColumn()
-  const projectedWinnersColumns = useProjectedWinnersColumn()
   const liquidationsColumns = useLiquidationsColumn()
+  const projectedWinnersColumns = useProjectedWinnersColumn()
+
+  const { data: liquidationsData } = useLiquidations()
+  const { data: top5Traders } = useTop5Traders()
+
+  const topLiquidation = useMemo(() => {
+    if (!liquidationsData || liquidationsData.length === 0) return null
+    return liquidationsData[0]
+  }, [liquidationsData])
+
+  const projectedWinners = useMemo(() => {
+    if (!top5Traders || !topLiquidation) return achievements
+
+    const top5WithAchievements = top5Traders.map((trader: TopTradersData, index: number) => ({
+      ...trader,
+      ...achievements[index],
+    }))
+
+    const combinedTraders = [
+      ...top5WithAchievements,
+      {
+        ...topLiquidation,
+        ...achievements[5],
+      },
+    ]
+
+    return combinedTraders
+  }, [top5Traders, topLiquidation])
 
   const tabs: CardTab[] = useMemo(() => {
     return [
@@ -26,11 +55,11 @@ export default function LeaderboardTable() {
       {
         title: 'Projected Winners',
         renderContent: () => (
-          <ProjectedWinners columns={projectedWinnersColumns} data={achievements} />
+          <ProjectedWinners columns={projectedWinnersColumns} data={projectedWinners} />
         ),
       },
     ]
-  }, [topTradersColumns, projectedWinnersColumns, liquidationsColumns])
+  }, [topTradersColumns, projectedWinnersColumns, liquidationsColumns, projectedWinners])
 
   if (!tabs.length) return null
 

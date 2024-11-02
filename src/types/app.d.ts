@@ -1416,6 +1416,14 @@ interface PoolInfo {
 }
 type ChartDataItem = { date: string; value: number }
 type ChartData = ChartDataItem[]
+
+interface TraderData {
+  account_id: string
+  realized_pnl: string
+  total_pnl: string
+  unrealized_pnl: string
+}
+
 interface TopTradersData {
   account_id: string
   realized_pnl: string
@@ -1425,8 +1433,8 @@ interface TopTradersData {
   trader: string
 }
 interface ProjectedWinnersData {
+  trader?: string
   achievement: string
-  metric: string
   description: string
   reward: string
 }
@@ -1437,11 +1445,6 @@ interface LiquidationsData {
   number_liquidations: string
   total_liquidated_amount: string
 }
-interface LiquidationAccount {
-  liquidatee_account_id: number
-  liquidation_count: number
-}
-
 interface LiquidationAmount {
   liquidatee_account_id: number
   total_liquidated_amount: string

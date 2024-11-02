@@ -5,7 +5,6 @@ import Position, { POSITION_META } from 'components/main/Leaderboard/table/commo
 import DisplayCurrency from 'components/common/DisplayCurrency'
 import { BNCoin } from 'types/classes/BNCoin'
 import { BN } from 'utils/helpers'
-import { FormattedNumber } from 'components/common/FormattedNumber'
 
 export default function useLiquidationsColumn() {
   return useMemo<ColumnDef<LiquidationsData>[]>(() => {
@@ -17,7 +16,6 @@ export default function useLiquidationsColumn() {
         },
       },
       {
-        accessorKey: 'trader',
         header: 'Trader',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
@@ -25,7 +23,6 @@ export default function useLiquidationsColumn() {
         },
       },
       {
-        accessorKey: 'account_id',
         header: 'Account ID',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
@@ -33,8 +30,7 @@ export default function useLiquidationsColumn() {
         },
       },
       {
-        accessorKey: 'liquidations',
-        header: '$ Liquidated',
+        header: 'Amount Liquidated',
         cell: ({ row }) => {
           return (
             <DisplayCurrency
@@ -44,24 +40,6 @@ export default function useLiquidationsColumn() {
               }}
               showSignPrefix
               className='text-xs'
-            />
-          )
-        },
-      },
-      {
-        accessorKey: 'amount_of_liquidations',
-        header: '# Liquidations',
-        meta: { className: 'max-w-20' },
-        cell: ({ row }) => {
-          const amount = Number(row.original.number_liquidations)
-          return (
-            <FormattedNumber
-              amount={amount}
-              animate
-              options={{
-                minDecimals: 0,
-                maxDecimals: 0,
-              }}
             />
           )
         },
