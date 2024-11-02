@@ -17,7 +17,7 @@ export const achievements = [
   {
     achievement: 'Jim Cramer on Mars',
     description: 'Top 4th trader by PnL',
-    reward: '$800 MARS',
+    reward: '$1 000 MARS',
   },
   {
     achievement: 'Martian Donald Duck',
