@@ -6,11 +6,11 @@ export default function useProjectedWinnersColumn() {
   return useMemo<ColumnDef<ProjectedWinnersData>[]>(() => {
     return [
       {
-        accessorKey: 'metric',
-        header: 'Metric',
-        meta: { className: 'max-w-20' },
+        accessorKey: 'trader',
+        header: 'Trader',
+        meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.metric} />
+          return <Account value={row.original.trader ? row.original.trader : 'N/A'} />
         },
       },
       {

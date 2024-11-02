@@ -3,7 +3,6 @@ import Text from 'components/common/Text'
 export const POSITION_META = {
   id: 'position',
   header: 'Pos',
-  accessorKey: 'position',
   meta: { className: 'max-w-10' },
 }
 

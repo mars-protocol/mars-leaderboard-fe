@@ -2,8 +2,6 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   OnChangeFn,
   RowSelectionState,
   SortingState,
@@ -12,7 +10,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import classNames from 'classnames'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 
 import Card from 'components/common/Card'
 import { SortAsc, SortDesc, SortNone } from 'components/common/Icons'
@@ -26,6 +24,8 @@ interface Props<T> {
   columns: ColumnDef<T>[]
   data: T[]
   initialSorting: SortingState
+  onSortingChange?: OnChangeFn<SortingState>
+  disableSortingRow?: boolean
   renderExpanded?: (row: TanstackRow<T>, table: TanstackTable<T>) => JSX.Element
   tableBodyClassName?: string
   spacingClassName?: string
@@ -41,6 +41,7 @@ export default function Table<T>(props: Props<T>) {
     title,
     columns,
     initialSorting,
+    onSortingChange,
     data,
     renderExpanded,
     tableBodyClassName,
@@ -51,7 +52,15 @@ export default function Table<T>(props: Props<T>) {
     setRowSelection,
     onClickRow,
   } = props
-  const [sorting, setSorting] = React.useState<SortingState>(initialSorting)
+
+  const [internalSorting, setInternalSorting] = React.useState<SortingState>(initialSorting)
+
+  useEffect(() => {
+    setInternalSorting(props.initialSorting)
+  }, [props.initialSorting])
+
+  const sorting = onSortingChange ? initialSorting : internalSorting
+  const sortingChange = onSortingChange ?? setInternalSorting
 
   const table = useReactTable({
     data,
@@ -60,11 +69,14 @@ export default function Table<T>(props: Props<T>) {
       sorting,
       rowSelection: selectedRows,
     },
+    manualSorting: true,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
+    onSortingChange: (newSorting) => {
+      sortingChange(newSorting)
+      if (!onSortingChange) setInternalSorting(newSorting)
+    },
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
   })
 
   return (

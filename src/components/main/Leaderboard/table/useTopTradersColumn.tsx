@@ -17,7 +17,6 @@ export default function useTopTraderColumns() {
         },
       },
       {
-        accessorKey: 'trader',
         header: 'Trader',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
@@ -25,7 +24,6 @@ export default function useTopTraderColumns() {
         },
       },
       {
-        accessorKey: 'account_id',
         header: 'Account ID',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
@@ -34,6 +32,7 @@ export default function useTopTraderColumns() {
       },
       {
         accessorKey: 'total_pnl',
+        id: 'total_pnl',
         header: 'Profit & Loss (PnL)',
         cell: ({ row }) => {
           return (
