@@ -1434,7 +1434,8 @@ interface TopTradersData {
 }
 interface ProjectedWinnersData {
   trader?: string
-  achievement: string
+  total_pnl?: string
+  total_liquidated_amount?: string
   description: string
   reward: string
 }

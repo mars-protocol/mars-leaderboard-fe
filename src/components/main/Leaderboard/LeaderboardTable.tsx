@@ -6,7 +6,7 @@ import ProjectedWinners from 'components/main/Leaderboard/table/ProjectedWinners
 import useTopTraderColumn from 'components/main/Leaderboard/table/useTopTradersColumn'
 import useProjectedWinnersColumn from 'components/main/Leaderboard/table/useProjectedWinnersColumn'
 import useLiquidationsColumn from 'components/main/Leaderboard/table/useLiquidationsColumn'
-import { achievements } from 'components/main/Leaderboard/data'
+import { rewards } from 'components/main/Leaderboard/data'
 import useLiquidations from 'hooks/leaderboard/useTradersLiquidations'
 import useTop5Traders from 'hooks/leaderboard/useTop5Traders'
 
@@ -24,18 +24,18 @@ export default function LeaderboardTable() {
   }, [liquidationsData])
 
   const projectedWinners = useMemo(() => {
-    if (!top5Traders || !topLiquidation) return achievements
+    if (!top5Traders || !topLiquidation) return rewards
 
     const top5WithAchievements = top5Traders.map((trader: TopTradersData, index: number) => ({
       ...trader,
-      ...achievements[index],
+      ...rewards[index],
     }))
 
     const combinedTraders = [
       ...top5WithAchievements,
       {
         ...topLiquidation,
-        ...achievements[5],
+        ...rewards[5],
       },
     ]
 
