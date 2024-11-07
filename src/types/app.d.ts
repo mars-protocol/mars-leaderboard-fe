@@ -1433,6 +1433,7 @@ interface TopTradersData {
   trader: string
 }
 interface ProjectedWinnersData {
+  name: string
   trader?: string
   total_pnl?: string
   total_liquidated_amount?: string

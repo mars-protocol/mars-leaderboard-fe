@@ -17,7 +17,7 @@ export default function useProjectedWinnersColumn() {
         },
       },
       {
-        header: 'Achievement',
+        header: 'Pnl',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
           const coinValue =
@@ -38,6 +38,13 @@ export default function useProjectedWinnersColumn() {
               className='text-xs'
             />
           )
+        },
+      },
+      {
+        header: 'Achievement',
+        meta: { className: 'max-w-30' },
+        cell: ({ row }) => {
+          return <Account value={row.original.name} />
         },
       },
       {
