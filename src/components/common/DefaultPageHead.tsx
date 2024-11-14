@@ -3,7 +3,7 @@ import Head from 'next/head'
 function DefaultPageHead() {
   return (
     <Head>
-      <title>Mars Protocol Risk Dashboard</title>
+      <title>Mars Protocol Leaderboard</title>
       <meta charSet='utf-8' />
       <link href='/favicon.svg' rel='icon' />
       <link href='/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' />
