@@ -1,7 +1,7 @@
 import Text from 'components/common/Text'
 
 interface Props {
-  value: string
+  value: string | number
 }
 
 export default function Account(props: Props) {

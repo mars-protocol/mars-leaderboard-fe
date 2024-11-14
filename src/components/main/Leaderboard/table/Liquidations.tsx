@@ -5,7 +5,7 @@ import { CircularProgress } from 'components/common/CircularProgress'
 import Text from 'components/common/Text'
 
 interface Props {
-  columns: ColumnDef<LiquidationsData>[]
+  columns: ColumnDef<ProcessedLiquidation>[]
 }
 export default function Liquidations(props: Props) {
   const { columns } = props

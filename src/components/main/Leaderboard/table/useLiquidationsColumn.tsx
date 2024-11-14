@@ -7,7 +7,7 @@ import { BNCoin } from 'types/classes/BNCoin'
 import { BN } from 'utils/helpers'
 
 export default function useLiquidationsColumn() {
-  return useMemo<ColumnDef<LiquidationsData>[]>(() => {
+  return useMemo<ColumnDef<ProcessedLiquidation>[]>(() => {
     return [
       {
         ...POSITION_META,

@@ -1,11 +1,15 @@
 export default async function getTradersLiquidations() {
   try {
-    const limit = 6
+    const limit = 8
     const response = await fetch(
       `https://testnet-api.marsprotocol.io/v2/liquidations/statistics?chain=neutron&product=creditmanager&limit=${limit}`,
     )
-    const data = await response.json()
+    const data: LiquidationResponse = await response.json()
     const topLiquidations = data.data[0].top_liquidated_amounts
+
+    topLiquidations.sort(
+      (a, b) => parseFloat(b.total_liquidated_amount) - parseFloat(a.total_liquidated_amount),
+    )
 
     const processedData = topLiquidations.map((liquidation: LiquidationAmount, index: number) => {
       return {
@@ -16,7 +20,7 @@ export default async function getTradersLiquidations() {
       }
     })
 
-    return processedData
+    return processedData as ProcessedLiquidation[]
   } catch (error) {
     console.error('Could not fetch liquidations data.', error)
     return null

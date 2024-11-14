@@ -1440,14 +1440,32 @@ interface ProjectedWinnersData {
   description: string
   reward: string
 }
-interface LiquidationsData {
-  position: number
-  trader: string
-  account_id: string
-  number_liquidations: string
-  total_liquidated_amount: string
+interface LiquidationData {
+  top_liquidated_accounts: TopLiquidatedAccount[]
+  top_liquidated_amounts: LiquidationAmount[]
 }
+
+interface TopLiquidatedAccount {
+  liquidatee_account_id: number
+  liquidation_count: number
+}
+
 interface LiquidationAmount {
   liquidatee_account_id: number
   total_liquidated_amount: string
+  liquidation_datas: LiquidationDetail[]
+}
+
+interface LiquidationDetail {
+  liquidated_denom: string
+  liquidated_amount: string
+}
+interface ProcessedLiquidation {
+  position: number
+  account_id: number
+  total_liquidated_amount: string
+  trader: string
+}
+interface LiquidationResponse {
+  data: LiquidationData[]
 }
