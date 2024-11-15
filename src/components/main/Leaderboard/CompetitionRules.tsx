@@ -24,7 +24,7 @@ export default function CompetitionRules(props: Props) {
         <EscButton onClick={() => close()} enableKeyPress />
       </div>
 
-      <div className='flex flex-col gap-10 p-4'>
+      <div className='h-full flex flex-col justify-between p-4'>
         {COMPETITION_INFO_ITEMS.map((item, index) => (
           <div key={index} className='flex items-center gap-8'>
             <div
@@ -51,18 +51,23 @@ export default function CompetitionRules(props: Props) {
 export const COMPETITION_INFO_ITEMS = [
   {
     icon: <Circle />,
+    title: 'Signup between Nov 18, 12pm UTC and Nov 25, 12pm UTC',
+    description: 'Mint your credit account to signup.',
+  },
+  {
+    icon: <Circle />,
     title: 'Ensure you’re on Pion-1 Neutron Public Testnet',
     description:
       'You will receive $10,000.00 as testnet funds to trade with. This is not real money.',
   },
   {
     icon: <Circle />,
-    title: 'Do not trade before 1 Nov 2024, 8am UTC',
+    title: 'Do not trade before Nov 25, 4pm UTC',
     description: 'Your account will be disqualified if you trade before this date.',
   },
   {
     icon: <Circle />,
-    title: 'Trade until 4 Nov 2024, 8am UTC',
+    title: 'Trade until Dec 2, 4pm UTC',
     description: 'Only perps trading will be considered for the competition.',
   },
 ]
