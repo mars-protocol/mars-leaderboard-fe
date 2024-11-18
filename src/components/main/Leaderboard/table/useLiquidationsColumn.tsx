@@ -38,7 +38,6 @@ export default function useLiquidationsColumn() {
               options={{
                 abbreviated: false,
               }}
-              showSignPrefix
               className='text-xs'
             />
           )
