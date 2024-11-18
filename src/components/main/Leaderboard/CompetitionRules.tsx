@@ -19,7 +19,7 @@ export default function CompetitionRules(props: Props) {
       show={show}
       setShow={setShow}
     >
-      <div className='flex items-center justify-between p-4'>
+      <div className='flex items-center justify-between px-4 py-2'>
         <Text size='xl'>Competition Rules</Text>
         <EscButton onClick={() => close()} enableKeyPress />
       </div>
@@ -58,7 +58,7 @@ export const COMPETITION_INFO_ITEMS = [
     icon: <Circle />,
     title: 'Ensure you’re on Pion-1 Neutron Public Testnet',
     description:
-      'You will receive $10,000.00 as testnet funds to trade with. This is not real money.',
+      'You will receive $10,000.00 as testnet funds to trade with just before the competition starts on Monday, Nov 25, 4pm UTC. This is not real money',
   },
   {
     icon: <Circle />,
