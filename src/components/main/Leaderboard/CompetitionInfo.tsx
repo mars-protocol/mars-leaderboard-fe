@@ -24,7 +24,7 @@ export default function CompetitonInfo() {
           size='5xl'
           className='italic font-bold tracking-wide text-white drop-shadow-white-glow'
         >
-          $4,000
+          $10,000
         </Text>
         <Text className='text-white/80'>Trading Competition</Text>
         <Text size='xs' className='text-white/80'>
