@@ -24,9 +24,9 @@ export default function LeaderboardTable() {
   }, [liquidationsData])
 
   const projectedWinners = useMemo(() => {
-    if (!top5Traders || !topLiquidation) return rewards
+    if (!top5Traders) return rewards
 
-    const top5WithAchievements = top5Traders.data.map((trader: TopTradersData, index: number) => ({
+    const top5WithAchievements = top5Traders?.data.map((trader: TopTradersData, index: number) => ({
       ...trader,
       ...rewards[index],
     }))
