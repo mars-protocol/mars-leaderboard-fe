@@ -25,6 +25,13 @@ export default function TopTraders(props: Props) {
 
   const totalPages = Math.ceil(maxEntries / pageSize)
 
+  const formattedTime = topTradersData?.last_updated
+    ? new Date(topTradersData.last_updated * 1000).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : 'N/A'
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
   }
@@ -63,11 +70,14 @@ export default function TopTraders(props: Props) {
         onSortingChange={setSorting}
         hideCard
       />
-      {totalPages > 1 && (
-        <div className='mt-auto'>
+      <div className='mt-auto flex justify-between items-center px-4'>
+        <Text size='2xs' className='text-white/40'>
+          Last updated: {formattedTime}
+        </Text>
+        {totalPages > 1 && (
           <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

@@ -11,7 +11,7 @@ export default function Pagination(props: Props) {
   const { currentPage, totalPages, onPageChange } = props
 
   return (
-    <div className='flex justify-end gap-3 items-end p-1 pr-3'>
+    <div className='flex justify-end gap-3 items-end'>
       <Text size='2xs' className='text-white/50 mt-1'>
         Page {currentPage} out of {totalPages}
       </Text>

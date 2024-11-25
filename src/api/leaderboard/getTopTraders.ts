@@ -22,7 +22,7 @@ export default async function getTopTraders(
       }
     })
 
-    return { data: processedData, total: data.total }
+    return { data: processedData, total: data.total, last_updated: data.last_updated }
   } catch (error) {
     console.error('Could not fetch top traders data.', error)
     return null

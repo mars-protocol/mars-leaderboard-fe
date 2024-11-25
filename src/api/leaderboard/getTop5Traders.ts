@@ -11,7 +11,10 @@ export default async function getTop5Traders() {
       trader: `Trader ${item.account_id}`,
     }))
 
-    return processedData
+    return {
+      data: processedData,
+      last_updated: data.last_updated,
+    }
   } catch (error) {
     console.error('Could not fetch top traders data.', error)
     return null

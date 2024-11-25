@@ -1424,11 +1424,7 @@ interface TraderData {
   unrealized_pnl: string
 }
 
-interface TopTradersData {
-  account_id: string
-  realized_pnl: string
-  unrealized_pnl: string
-  total_pnl: string
+interface TopTradersData extends TraderData {
   position: number
   trader: string
 }

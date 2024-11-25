@@ -26,7 +26,7 @@ export default function LeaderboardTable() {
   const projectedWinners = useMemo(() => {
     if (!top5Traders || !topLiquidation) return rewards
 
-    const top5WithAchievements = top5Traders.map((trader: TopTradersData, index: number) => ({
+    const top5WithAchievements = top5Traders.data.map((trader: TopTradersData, index: number) => ({
       ...trader,
       ...rewards[index],
     }))
@@ -42,6 +42,13 @@ export default function LeaderboardTable() {
     return combinedTraders
   }, [top5Traders, topLiquidation])
 
+  const formattedTime = top5Traders?.last_updated
+    ? new Date(top5Traders.last_updated * 1000).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : 'N/A'
+
   const tabs: CardTab[] = useMemo(() => {
     return [
       {
@@ -55,11 +62,21 @@ export default function LeaderboardTable() {
       {
         title: 'Projected Winners',
         renderContent: () => (
-          <ProjectedWinners columns={projectedWinnersColumns} data={projectedWinners} />
+          <ProjectedWinners
+            columns={projectedWinnersColumns}
+            data={projectedWinners}
+            lastUpdated={formattedTime}
+          />
         ),
       },
     ]
-  }, [topTradersColumns, projectedWinnersColumns, liquidationsColumns, projectedWinners])
+  }, [
+    topTradersColumns,
+    projectedWinnersColumns,
+    liquidationsColumns,
+    projectedWinners,
+    formattedTime,
+  ])
 
   if (!tabs.length) return null
 
