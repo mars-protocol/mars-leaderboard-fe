@@ -3,7 +3,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import useTradersLiquidations from 'hooks/leaderboard/useTradersLiquidations'
 import { CircularProgress } from 'components/common/CircularProgress'
 import Text from 'components/common/Text'
-import Pagination from './Pagination'
+import Pagination from 'components/main/Leaderboard/table/Pagination'
 import { useState } from 'react'
 
 interface Props {
