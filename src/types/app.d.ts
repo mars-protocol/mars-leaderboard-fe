@@ -1307,6 +1307,10 @@ type PnL =
       loss: Coin
     }
 
+interface AstroportAssetsCached {
+  tokens: AstroportAsset[]
+}
+
 interface AstroportAsset {
   chainId: string
   denom: string
