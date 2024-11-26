@@ -68,6 +68,7 @@ export const COMPETITION_INFO_ITEMS = [
   {
     icon: <Circle />,
     title: 'Trade until Dec 2, 4pm UTC',
-    description: 'Only perps trading will be considered for the competition.',
+    description:
+      "Only perps trading will be considered for the competition. Deposits into the Vault are excluded and won't count toward your PNL.",
   },
 ]

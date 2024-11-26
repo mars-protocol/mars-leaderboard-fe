@@ -80,5 +80,5 @@ export default function LeaderboardTable() {
 
   if (!tabs.length) return null
 
-  return <CardWithTabs tabs={tabs} className='text-xs h-100 md:h-90' />
+  return <CardWithTabs tabs={tabs} className='text-xs md:h-90' />
 }

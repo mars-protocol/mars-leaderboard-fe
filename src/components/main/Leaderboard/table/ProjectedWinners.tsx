@@ -13,11 +13,11 @@ export default function ProjectedWinners(props: Props) {
   if (!data.length) return []
 
   return (
-    <>
+    <div className='overflow-auto'>
       <Table title='Projected Winners' columns={columns} data={data} initialSorting={[]} hideCard />
-      <Text size='2xs' className='text-white/40 p-2 text-right'>
+      <Text size='2xs' className='text-white/40 p-2 text-right shrink-0'>
         Last updated: {lastUpdated}
       </Text>
-    </>
+    </div>
   )
 }

@@ -6,6 +6,9 @@ import DisplayCurrency from 'components/common/DisplayCurrency'
 import { BNCoin } from 'types/classes/BNCoin'
 import { BN } from 'utils/helpers'
 import { PRICE_ORACLE_DECIMALS } from 'constants/query'
+import { TextLink } from 'components/common/TextLink'
+import Text from 'components/common/Text'
+import { ExternalLink } from 'components/common/Icons'
 
 export default function useTopTraderColumns() {
   return useMemo<ColumnDef<TopTradersData>[]>(() => {
@@ -27,7 +30,24 @@ export default function useTopTraderColumns() {
         header: 'Account ID',
         meta: { className: 'max-w-30' },
         cell: ({ row }) => {
-          return <Account value={row.original.account_id} />
+          const url = `https://perps.marsprotocol.io/wallets/neutron/portfolio/${row.original.account_id}`
+          return (
+            <div
+              className='flex items-center justify-end space-x-1'
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
+            >
+              <Text size='xs'>{row.original.account_id}</Text>
+              <TextLink
+                href={url}
+                target='_blank'
+                title={`Mars Protocol Account ID #${row.original.account_id}`}
+              >
+                <ExternalLink className='w-3 h-3 text-white/40 hover:text-inherit hover:cursor-pointer' />
+              </TextLink>
+            </div>
+          )
         },
       },
       {
