@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { useCallback, useEffect, useMemo } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
-import { ChevronDown } from 'components/common/Icons'
 import Text from 'components/common/Text'
 import ChainSelect from 'components/header/ChainSelect'
 import useStore from 'store'
@@ -56,46 +55,6 @@ export default function MobileNavigation(props: Props) {
           <Text size='sm'>Outpost:</Text>
           <div className='relative'>
             <ChainSelect withText />
-          </div>
-        </div>
-        <div className='flex items-center justify-between w-full'>
-          <Text size='sm'>Page:</Text>
-          <div className='relative'>
-            <select
-              className='py-1.5 pl-2 pr-6 text-sm text-white bg-transparent border rounded-sm appearance-none border-white/30 focus:outline-none active:outline-none'
-              onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-                selectPage(event.target.value as Page)
-              }
-            >
-              {menu.map((item, index) => {
-                if (item.submenu) {
-                  return item.submenu.map((subItem, subIndex) => {
-                    return (
-                      <option
-                        key={subIndex}
-                        value={subItem.page}
-                        selected={subItem.page === currentPage}
-                      >
-                        {`${item.label} - ${subItem.label}`}
-                      </option>
-                    )
-                  })
-                }
-
-                return (
-                  <option
-                    key={index}
-                    value={item.pages[0]}
-                    selected={item.pages.indexOf(currentPage as Page) !== -1}
-                  >
-                    {item.label}
-                  </option>
-                )
-              })}
-            </select>
-            <div className='absolute w-3 -translate-y-1/2 right-2 top-1/2 -z-1'>
-              <ChevronDown />
-            </div>
           </div>
         </div>
       </div>
