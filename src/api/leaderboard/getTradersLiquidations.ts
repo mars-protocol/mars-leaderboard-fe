@@ -1,6 +1,6 @@
 export default async function getTradersLiquidations() {
   try {
-    const limit = 8
+    const limit = 24
     const response = await fetch(
       `https://testnet-api.marsprotocol.io/v2/liquidations/statistics?chain=neutron&product=creditmanager&limit=${limit}`,
     )

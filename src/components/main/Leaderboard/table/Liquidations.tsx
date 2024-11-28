@@ -3,6 +3,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import useTradersLiquidations from 'hooks/leaderboard/useTradersLiquidations'
 import { CircularProgress } from 'components/common/CircularProgress'
 import Text from 'components/common/Text'
+import Pagination from 'components/main/Leaderboard/table/Pagination'
+import { useState } from 'react'
 
 interface Props {
   columns: ColumnDef<ProcessedLiquidation>[]
@@ -10,7 +12,23 @@ interface Props {
 export default function Liquidations(props: Props) {
   const { columns } = props
 
+  const [page, setPage] = useState<number>(1)
+  const pageSize = 6
+  const maxEntries = 24
+  const totalPages = Math.ceil(maxEntries / pageSize)
+
   const { data, isLoading } = useTradersLiquidations()
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage)
+  }
+
+  const getCurrentPageData = () => {
+    if (!data) return []
+    const startIndex = (page - 1) * pageSize
+    const endIndex = startIndex + pageSize
+    return data.slice(startIndex, endIndex)
+  }
 
   if (isLoading || !data || data.length === 0) {
     return (
@@ -32,13 +50,18 @@ export default function Liquidations(props: Props) {
   }
 
   return (
-    <Table
-      title='Liquidations'
-      columns={columns}
-      data={data}
-      spacingClassName='px-2 md:px-4 py-2'
-      initialSorting={[]}
-      hideCard
-    />
+    <>
+      <Table
+        title='Liquidations'
+        columns={columns}
+        data={getCurrentPageData()}
+        tableBodyClassName='text-xs'
+        initialSorting={[]}
+        hideCard
+      />
+      <div className='text-right px-4 py-2'>
+        <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+      </div>
+    </>
   )
 }
