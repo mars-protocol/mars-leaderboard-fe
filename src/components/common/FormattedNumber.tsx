@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { useEffect, useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
-import { isEqual } from 'lodash'
+import isEqual from 'lodash.isequal'
 
 import { DEFAULT_SETTINGS } from 'constants/defaultSettings'
 import { LocalStorageKeys } from 'constants/localStorageKeys'

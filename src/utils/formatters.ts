@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js'
-import moment from 'moment'
 
 import { BN_ZERO } from 'constants/math'
 import { ORACLE_DENOM } from 'constants/oracle'
@@ -16,16 +15,16 @@ export function truncate(text = '', [h, t]: [number, number] = [6, 6]): string {
 }
 
 export const produceCountdown = (remainingTime: number) => {
-  const duration = moment.duration(remainingTime, 'milliseconds')
-  const days = formatValue(duration.asDays(), { minDecimals: 0, maxDecimals: 0 })
+  const totalSeconds = Math.floor(remainingTime / 1000)
+  const days = Math.floor(totalSeconds / 86400)
+  const hours = Math.floor((totalSeconds % 86400) / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
 
-  duration.subtract(days, 'days')
-  const hours = formatValue(duration.asHours(), { minDecimals: 0, maxDecimals: 0 })
+  const daysFormatted = formatValue(days, { minDecimals: 0, maxDecimals: 0 })
+  const hoursFormatted = formatValue(hours, { minDecimals: 0, maxDecimals: 0 })
+  const minutesFormatted = formatValue(minutes, { minDecimals: 0, maxDecimals: 0 })
 
-  duration.subtract(hours, 'hours')
-  const minutes = formatValue(duration.asMinutes(), { minDecimals: 0, maxDecimals: 0 })
-
-  return `${days}d ${hours}h ${minutes}m`
+  return `${daysFormatted}d ${hoursFormatted}h ${minutesFormatted}m`
 }
 
 export const formatValue = (amount: number | string, options?: FormatOptions): string => {

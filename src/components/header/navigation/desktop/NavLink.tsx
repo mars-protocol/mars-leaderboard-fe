@@ -15,7 +15,7 @@ interface Props {
   onMouseOver?: () => void
 }
 
-export const NavLink = (props: Props) => {
+export function NavLink(props: Props) {
   const [searchParams] = useSearchParams()
   const { isHome, item, className, onClick } = props
 
