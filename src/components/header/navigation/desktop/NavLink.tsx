@@ -3,8 +3,12 @@ import { ReactNode } from 'react'
 import { NavLink as Link, useSearchParams } from 'react-router-dom'
 
 import { ExternalLink } from 'components/common/Icons'
-import { getIsActive } from 'components/header/navigation/desktop/DesktopNavigation'
 import { getRoute } from 'utils/route'
+
+function getIsActive(pages: string[]) {
+  const segments = location.pathname.split('/')
+  return pages.some((page) => segments.includes(page))
+}
 
 interface Props {
   children: string | ReactNode

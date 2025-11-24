@@ -205,10 +205,9 @@ interface Bridge {
 }
 
 interface ChainConfig {
-  lp?: Asset[]
-  stables: string[]
-  defaultTradingPair: TradingPair
-  bech32Config: import('@keplr-wallet/types').Bech32Config
+  name: string
+  id: string
+  swapFee: number
   contracts: {
     redBank: string
     incentives: string
@@ -218,44 +217,23 @@ interface ChainConfig {
     accountNft: string
     perps: string
     pyth: string
-  }
-  defaultCurrency: {
-    coinDenom: string
-    coinMinimalDenom: string
-    coinDecimals: number
-    coinGeckoId: string
-    gasPriceStep: {
-      low: number
-      average: number
-      high: number
-    }
+    swapper: string
+    dualitySwapper: string
+    structuredPoints: string
   }
   endpoints: {
-    rest: string
-    rpc: string
-    swap: string
-    explorer: string
-    pools?: string
-    routes: string
-    dexAssets: string
-    dexPools?: string
-    aprs: {
-      vaults: string
-      stride: string
-    }
+    restUrl: string
+    rpcUrl: string
+    fallbackRpc?: string
+    fallbackRpcs?: string[]
+    routes?: string
+    amberBackend: string
   }
-  dexName: string
-  explorerName: string
-  features: ('ibc-transfer' | 'ibc-go')[]
-  gasPrice: string
-  id: import('types/enums').ChainInfoID
-  name: string
-  network: 'mainnet' | 'testnet'
-  vaults: VaultMetaData[]
-  hls: boolean
-  perps: boolean
-  farm: boolean
-  anyAsset: boolean
+  queries: {
+    allAssetParams: string
+    allMarkets: string
+    allCoinBalances: string
+  }
 }
 
 interface ContractClients {
@@ -1070,26 +1048,9 @@ interface TransactionEventAttribute {
 type TransactionType = 'default' | 'oracle' | 'create' | 'burn' | 'unlock' | 'transaction'
 
 interface CommonSlice {
-  address?: string
   chainConfig: ChainConfig
-  userDomain?: {
-    domain: string
-    domain_full: string
-  }
-  balances: Coin[]
-  client?: WalletClient
-  isOpen: boolean
-  selectedAccount: string | null
-  updatedAccount?: Account
   focusComponent: FocusComponent | null
   mobileNavExpanded: boolean
-  accountDetailsExpanded: boolean
-  migrationBanner: boolean
-  tutorial: boolean
-  useMargin: boolean
-  useAutoRepay: boolean
-  isOracleStale: boolean
-  isHLS: boolean
   isV1: boolean
   assets: Asset[]
 }
@@ -1097,10 +1058,6 @@ interface CommonSlice {
 interface FocusComponent {
   component: import('react').JSX.Element | null
   onClose?: () => void
-}
-
-interface ModalSlice {
-  settingsModal: boolean
 }
 
 interface AlertDialogButton {
@@ -1262,7 +1219,7 @@ interface PerpsParams {
   openingFeeRate: BigNumber
 }
 
-interface Store extends CommonSlice, ModalSlice {}
+interface Store extends CommonSlice {}
 
 interface FormatOptions {
   decimals?: number

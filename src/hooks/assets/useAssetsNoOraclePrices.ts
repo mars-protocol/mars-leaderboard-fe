@@ -4,7 +4,6 @@ import USD from 'constants/USDollar'
 import { PRICE_STALE_TIME } from 'constants/query'
 import useChainConfig from 'hooks/chain/useChainConfig'
 import useAssetParams from 'hooks/params/useAssetParams'
-import useStore from 'store'
 import useSWR from 'swr'
 import { AssetParamsBaseForAddr } from 'types/generated/mars-params/MarsParams.types'
 import { byDenom } from 'utils/array'
@@ -132,8 +131,7 @@ async function fetchSortAndMapAllAssets(
     return a.symbol.localeCompare(b.symbol)
   })
 
-  // We need to set the assets to the store to use them in the broadcast slice
-  useStore.setState({ assets: sortedAssets })
+  // Assets are returned directly, no need to store them
   if (!chainConfig.anyAsset)
     return sortedAssets.filter((asset) => asset.isWhitelisted || asset.denom === 'usd')
 

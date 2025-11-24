@@ -1,6 +1,5 @@
 import getOraclePrices from 'api/prices/getOraclePrices'
 import fetchPythPrices from 'api/prices/getPythPrices'
-import useStore from 'store'
 import { BNCoin } from 'types/classes/BNCoin'
 
 export default async function getPrices(
@@ -18,17 +17,9 @@ export default async function getPrices(
 
   try {
     const oraclePrices: BNCoin[] = await getOraclePrices(chainConfig, assetsWithOraclePrices)
-
-    if (oraclePrices) useStore.setState({ isOracleStale: false })
-
     return [...pythAndOraclePrices, ...oraclePrices]
   } catch (ex) {
     console.error(ex)
-    let message = 'Unknown Error'
-    if (ex instanceof Error) message = ex.message
-    if (message.includes('price publish time is too old'))
-      useStore.setState({ isOracleStale: true })
-
     return [...pythAndOraclePrices]
   }
 }

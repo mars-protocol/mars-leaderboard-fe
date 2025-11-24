@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
 import { Logo } from 'components/common/Icons'
+import WalletConnectButton from 'components/common/WalletConnectButton'
 import { NavLink } from 'components/header/navigation/desktop/NavLink'
 
 export default function Header() {
@@ -19,6 +20,9 @@ export default function Header() {
                 <Logo className='text-white' />
               </span>
             </NavLink>
+          </div>
+          <div className='flex items-center'>
+            <WalletConnectButton />
           </div>
         </div>
       </header>
