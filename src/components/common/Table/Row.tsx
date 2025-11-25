@@ -1,87 +1,45 @@
 import { flexRender, Row as TanstackRow, Table as TanstackTable } from '@tanstack/react-table'
 import classNames from 'classnames'
 
-import { LEFT_ALIGNED_ROWS } from 'constants/table'
-
 interface Props<T> {
   row: TanstackRow<T>
-  table: TanstackTable<T>
-  renderExpanded?: (row: TanstackRow<T>, table: TanstackTable<T>) => JSX.Element
-  rowClassName?: string
-  spacingClassName?: string
-  className?: string
-  isSelectable?: boolean
-  type?: TableType
-  onClick?: (id: string) => void
 }
 
-function getBorderColor(
-  type: TableType,
-  row: AccountBalanceRow | AccountStrategyRow | AccountPerpRow,
-) {
-  if (type === 'strategies') return ''
-  if (type === 'balances') {
-    const balancesRow = row as AccountBalanceRow
-    return balancesRow.type === 'borrow' ? 'border-loss' : 'border-profit'
-  }
-
-  const perpRow = row as AccountPerpRow
-  return perpRow.tradeDirection === 'short' ? 'border-loss' : 'border-profit'
-}
-
-export default function Row<T>(props: Props<T>) {
-  const { renderExpanded, table, row, type, spacingClassName, isSelectable } = props
-  const canExpand = !!renderExpanded
+export default function StyledRow<T>(props: Props<T>) {
+  const { row } = props
+  const rank = (row.original as any)?.rank || 0
 
   return (
     <>
-      <tr
-        key={`${row.id}-row`}
-        className={classNames(
-          'transition-bg duration-100 border-white/10',
-          (renderExpanded || isSelectable || props.onClick) && 'hover:cursor-pointer',
-          canExpand && row.getIsExpanded()
-            ? 'is-expanded border-t gradient-header'
-            : 'hover:bg-white/5',
-        )}
-        onClick={(e) => {
-          e.preventDefault()
-          if (isSelectable) {
-            row.toggleSelected()
-          }
-          if (canExpand) {
-            const isExpanded = row.getIsExpanded()
-            table.resetExpanded()
-            !isExpanded && row.toggleExpanded()
-          }
-
-          if (props.onClick) {
-            props.onClick((row.original as any).asset.denom)
-          }
-        }}
-      >
-        {row.getVisibleCells().map((cell) => {
-          return (
-            <td
-              key={cell.id}
-              className={classNames(
-                'text-sm',
-                LEFT_ALIGNED_ROWS.includes(cell.column.id) ? 'text-left' : 'text-right',
-                spacingClassName ?? 'px-3 py-3',
-                type &&
-                  type !== 'strategies' &&
-                  LEFT_ALIGNED_ROWS.includes(cell.column.id) &&
-                  'border-l',
-                type && type !== 'strategies' && getBorderColor(type, cell.row.original as any),
-                cell.column.columnDef.meta?.className,
-              )}
-            >
-              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-            </td>
-          )
-        })}
+      <tr key={`${row.id}-row`} className='group relative h-14'>
+        <td
+          colSpan={row.getVisibleCells().length}
+          className={classNames(
+            'absolute inset-0 m-1 transition-all duration-200 group-hover:bg-white/5',
+            'bg-linear-to-r from-white/3 to-white/1',
+            'border-solid -skew-x-25',
+            {
+              'border-[#FF4D4D69]': rank === 1,
+              'border-[#FF8C8C69]': rank === 2,
+              'border-[#B31F1F69]': rank === 3,
+              'border-white/10': rank > 3 || rank === 0,
+              'border-2': rank <= 3,
+              border: rank > 3,
+            },
+          )}
+        />
+        {row.getVisibleCells().map((cell) => (
+          <td
+            key={cell.id}
+            className={classNames(
+              'text-sm text-white/80 text-right px-16 relative z-10',
+              cell.column.columnDef.meta?.className,
+            )}
+          >
+            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          </td>
+        ))}
       </tr>
-      {row.getIsExpanded() && renderExpanded && renderExpanded(row, table)}
     </>
   )
 }

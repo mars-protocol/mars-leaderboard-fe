@@ -22,13 +22,17 @@ export default function Wallet(props: Props) {
   const { value, isLoading } = props
 
   if (isLoading) {
-    return <Text size='sm' className='text-white'>-</Text>
+    return (
+      <Text size='sm' className='text-white'>
+        -
+      </Text>
+    )
   }
 
   return (
-    <Text size='sm' className='text-white'>
-      {truncate(value.wallet, [10, 8])}
+    <Text size='sm' className='text-white/80 text-left'>
+      {value.wallet}
+      {/* {truncate(value.wallet, [10, 8])} */}
     </Text>
   )
 }
-

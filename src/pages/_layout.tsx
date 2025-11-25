@@ -31,18 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <SWRConfig value={{ use: [debugSWR] }}>
         <CosmosKitProvider>
-          <Suspense
-            fallback={
-              <div className='flex items-center justify-center w-full h-screen-full'>
-                <div className='flex flex-wrap justify-center w-full gap-4'>
-                  <CircularProgress size={60} />
-                  <Text className='w-full text-center' size='2xl'>
-                    Fetching data...
-                  </Text>
-                </div>
-              </div>
-            }
-          >
+          <Suspense>
             <PageMetadata />
             <Background />
             <Header />
