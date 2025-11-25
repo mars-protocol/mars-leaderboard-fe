@@ -3,6 +3,7 @@ import useFragmentLeaderboardColumns from 'components/leaderboard/table/column/u
 import Table from 'components/common/Table'
 import Intro from 'components/Intro'
 import FragmentStats from 'components/FragmentStats'
+import UserRankingCard from 'components/leaderboard/UserRankingCard'
 import { MarsFragments } from 'components/common/Icons'
 
 export default function MainPage() {
@@ -28,6 +29,9 @@ export default function MainPage() {
       <div className='relative z-10'>
         <Intro />
         <FragmentStats />
+        <div className='container mx-auto max-w-screen-xl px-4'>
+          <UserRankingCard />
+        </div>
         <Table
           title=''
           columns={columns}
