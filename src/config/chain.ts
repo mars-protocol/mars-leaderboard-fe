@@ -16,10 +16,9 @@ const chainConfig: ChainConfig = {
     structuredPoints: 'neutron1ng8zg06s64g6k3hecp2wejuqxxanlf7z88q0nawqdrrq07j2wwtsuhnjsq',
   },
   endpoints: {
-    // Base URL for REST API
-    restUrl: process.env.NEXT_PUBLIC_REST || 'https://rest-lb.neutron.org',
-    // Base URL for RPC Node
-    rpcUrl: process.env.NEXT_PUBLIC_RPC || 'https://rpc-lb.neutron.org',
+    // Legacy properties for compatibility
+    rest: process.env.NEXT_PUBLIC_REST || 'https://rest-lb.neutron.org',
+    rpc: process.env.NEXT_PUBLIC_RPC || 'https://rpc-lb.neutron.org',
     // Fallback RPC endpoints for better reliability
     fallbackRpcs: [
       'https://neutron-rpc.cosmos-apis.com',

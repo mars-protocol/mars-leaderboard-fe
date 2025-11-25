@@ -1,11 +1,10 @@
 import getPrices from 'api/prices/getPrices'
 import useAssetsNoOraclePrices from 'hooks/assets/useAssetsNoOraclePrices'
-import useChainConfig from 'hooks/chain/useChainConfig'
+import chainConfig from 'config/chain'
 import useSWR from 'swr'
 import { BNCoin } from 'types/classes/BNCoin'
 
 export default function useAssets() {
-  const chainConfig = useChainConfig()
   const { data: assets } = useAssetsNoOraclePrices()
 
   return useSWR(
@@ -27,7 +26,7 @@ export default function useAssets() {
         price:
           asset.denom === 'usd'
             ? BNCoin.fromCoin({ denom: 'usd', amount: '1' })
-            : prices.find((price) => price.denom === asset.denom) ?? asset.price,
+            : (prices.find((price) => price.denom === asset.denom) ?? asset.price),
       }
     })
   }

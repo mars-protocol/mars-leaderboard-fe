@@ -2,7 +2,7 @@ import getDexAssets from 'api/assets/getDexAssets'
 import getDexPools from 'api/assets/getDexPools'
 import USD from 'constants/USDollar'
 import { PRICE_STALE_TIME } from 'constants/query'
-import useChainConfig from 'hooks/chain/useChainConfig'
+import chainConfig from 'config/chain'
 import useAssetParams from 'hooks/params/useAssetParams'
 import useSWR from 'swr'
 import { AssetParamsBaseForAddr } from 'types/generated/mars-params/MarsParams.types'
@@ -11,7 +11,6 @@ import { BN } from 'utils/helpers'
 import { calculatePoolWeight } from 'utils/pools'
 
 export default function useAssetsNoOraclePrices() {
-  const chainConfig = useChainConfig()
   const { data: assetParams } = useAssetParams()
   /* PERPS
   const { data: perpsParams } = useAllPerpsParamsSC()

@@ -222,8 +222,8 @@ interface ChainConfig {
     structuredPoints: string
   }
   endpoints: {
-    restUrl: string
-    rpcUrl: string
+    rest: string
+    rpc: string
     fallbackRpc?: string
     fallbackRpcs?: string[]
     routes?: string
@@ -681,6 +681,12 @@ interface AssetTableRow {
   asset: BorrowAsset | Asset
   market?: Market
   value?: BigNumber
+}
+
+interface FragmentLeaderboardEntry {
+  rank: number
+  wallet: string
+  total_fragments: string
 }
 
 interface PythBarQueryData {

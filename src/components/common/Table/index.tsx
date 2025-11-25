@@ -26,7 +26,7 @@ interface Props<T> {
   initialSorting: SortingState
   onSortingChange?: OnChangeFn<SortingState>
   disableSortingRow?: boolean
-  renderExpanded?: (row: TanstackRow<T>, table: TanstackTable<T>) => JSX.Element
+  renderExpanded?: (row: TanstackRow<T>, table: TanstackTable<T>) => ReactElement
   tableBodyClassName?: string
   spacingClassName?: string
   type?: TableType
