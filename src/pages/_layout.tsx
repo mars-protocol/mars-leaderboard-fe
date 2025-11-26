@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <main
               className={classNames(
                 'md:min-h-[calc(100dvh-81px)]',
-                'mt-[73px]',
+                'mt-[25px]',
                 'flex',
                 'min-h-screen-full w-full relative',
                 'gap-4 p-2 pb-20',

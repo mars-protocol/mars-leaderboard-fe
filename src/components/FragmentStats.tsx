@@ -28,7 +28,7 @@ export default function FragmentStats() {
       delay: 0.1,
     },
     {
-      label: 'Fragments per USD',
+      label: 'Fragment per USD',
       value: '1',
       delay: 0.2,
     },
@@ -57,7 +57,7 @@ export default function FragmentStats() {
                     ease: [0.21, 0.47, 0.32, 0.98],
                   }}
                 >
-                  <motion.span className='text-5xl font-bold bg-linear-to-br from-white via-white to-white/60 bg-clip-text text-transparent md:text-6xl'>
+                  <motion.span className='text-5xl font-bold bg-linear-to-br from-white via-white to-white/60 bg-clip-text text-transparent md:text-7xl'>
                     {stat.value}
                   </motion.span>
 

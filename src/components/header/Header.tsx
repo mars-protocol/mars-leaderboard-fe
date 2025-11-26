@@ -13,10 +13,10 @@ export default function Header() {
           'before:content-[" "] before:absolute before:inset-0 before:-z-1 before:h-full before:w-full before:rounded-sm before:backdrop-blur-sticky',
         )}
       >
-        <div className='flex items-center justify-between px-4 py-4 border-b h-18 border-white/20'>
+        <div className='flex items-center justify-between px-4 py-4 h-18'>
           <div className='relative z-50 flex items-center flex-1'>
             <NavLink isHome item={{ pages: ['main'], label: 'home' }}>
-              <span className='block w-10 h-10'>
+              <span className='block w-40'>
                 <Logo className='text-white' />
               </span>
             </NavLink>
