@@ -15,15 +15,17 @@ export default function MainPage() {
       <div className='relative z-10'>
         <Intro />
         <FragmentStats />
-        <div className='container mx-auto max-w-screen-xl px-4'>
-          <UserRankingCard />
-        </div>
+        {/* <div className='container mx-auto max-w-screen-xl px-4'> */}
+        <UserRankingCard />
+        {/* </div> */}
+        {/* <div className='container max-w-screen-xl px-4 py-2'> */}
         <Table
           title=''
           columns={columns}
           data={fragmentLeaderboard || []}
           initialSorting={[{ id: 'rank', desc: false }]}
         />
+        {/* </div> */}
       </div>
     </div>
   )

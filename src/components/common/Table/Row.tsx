@@ -15,7 +15,7 @@ export default function StyledRow<T>(props: Props<T>) {
         <td
           colSpan={row.getVisibleCells().length}
           className={classNames(
-            'absolute inset-0 m-1 transition-all duration-200 group-hover:bg-white/5',
+            'absolute inset-0 my-1 mx-2 transition-all duration-200 group-hover:bg-white/5',
             'bg-linear-to-r from-white/3 to-white/1',
             'border-solid -skew-x-25',
             {

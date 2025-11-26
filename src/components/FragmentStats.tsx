@@ -28,7 +28,7 @@ export default function FragmentStats() {
       delay: 0.1,
     },
     {
-      label: 'Fragment per USD',
+      label: 'Fragment per USD a day',
       value: '1',
       delay: 0.2,
     },

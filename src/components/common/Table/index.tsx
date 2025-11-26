@@ -75,21 +75,21 @@ export default function Table<T>(props: Props<T>) {
       condition={!hideCard}
       wrapper={(children) => (
         <Card
-          className={classNames('w-full', type !== 'balances' && 'h-fit')}
-          contentClassName='max-w-full overflow-x-scroll scrollbar-hide'
+          className={classNames('w-full overflow-visible', type !== 'balances' && 'h-fit')}
+          contentClassName='max-w-full overflow-x-scroll scrollbar-hide overflow-y-visible py-2'
         >
           {children}
         </Card>
       )}
     >
-      <table className={classNames('w-full max-w-[90%] mx-auto', tableBodyClassName)}>
+      <table className={classNames('w-full max-w-[98%] mx-auto', tableBodyClassName)}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className='relative h-12'>
               <th
                 colSpan={headerGroup.headers.length}
                 className={classNames(
-                  'absolute inset-0 m-1',
+                  'absolute inset-0 m-2',
                   'bg-linear-to-r from-white/10 to-white/3 -skew-x-25',
                 )}
               />
@@ -114,9 +114,9 @@ export default function Table<T>(props: Props<T>) {
                   >
                     <Text
                       tag='span'
-                      size='2xs'
+                      size='xs'
                       className={classNames(
-                        'font-normal text-white/60',
+                        'font-normal text-white/40 uppercase tracking-wide',
                         header.column.columnDef.meta?.className || 'text-right',
                       )}
                     >
