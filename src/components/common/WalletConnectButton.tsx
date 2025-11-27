@@ -1,24 +1,24 @@
 'use client'
 
+import classNames from 'classnames'
 import { useState } from 'react'
 
 import { useChain } from '@cosmos-kit/react'
 
 import Overlay from 'components/common/Overlay'
+import Text from 'components/common/Text'
 import { Copy, Cross, ExternalLink, Wallet } from 'components/common/Icons'
 import chainConfig from 'config/chain'
+
+const buttonBaseStyles =
+  'flex items-center gap-2 px-4 py-2 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm transition-colors'
 
 export default function WalletConnectButton() {
   const [showModal, setShowModal] = useState(false)
 
-  const chainName = chainConfig.name
-
-  const { connect, isWalletConnecting, isWalletConnected, address, disconnect } =
-    useChain(chainName)
-
-  const handleConnect = () => {
-    connect()
-  }
+  const { connect, isWalletConnecting, isWalletConnected, address, disconnect } = useChain(
+    chainConfig.name,
+  )
 
   const handleDisconnect = () => {
     disconnect()
@@ -26,12 +26,11 @@ export default function WalletConnectButton() {
   }
 
   const handleCopyAddress = async () => {
-    if (address) {
-      try {
-        await navigator.clipboard.writeText(address)
-      } catch (err) {
-        console.error('Failed to copy address:', err)
-      }
+    if (!address) return
+    try {
+      await navigator.clipboard.writeText(address)
+    } catch (err) {
+      console.error('Failed to copy address:', err)
     }
   }
 
@@ -41,19 +40,14 @@ export default function WalletConnectButton() {
     }
   }
 
-  const truncatedAddress = address
-    ? `${address.substring(0, 6)}...${address.substring(address.length - 4)}`
-    : ''
-
   if (isWalletConnected && address) {
+    const truncatedAddress = `${address.substring(0, 6)}...${address.substring(address.length - 4)}`
+
     return (
       <>
-        <button
-          onClick={() => setShowModal(true)}
-          className='flex items-center gap-2 px-4 py-2 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm transition-colors cursor-pointer'
-        >
+        <button onClick={() => setShowModal(true)} className={buttonBaseStyles}>
           <Wallet className='w-4 h-4' />
-          <span>{truncatedAddress}</span>
+          {truncatedAddress}
         </button>
         <Overlay
           show={showModal}
@@ -61,57 +55,50 @@ export default function WalletConnectButton() {
           className='top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto max-w-md mx-4'
         >
           <div className='relative w-full min-w-80 bg-surface p-6 border border-white/10 rounded-sm'>
-            {/* Close button */}
             <button
               onClick={() => setShowModal(false)}
-              className='absolute top-4 right-4 text-white/60 hover:text-white transition-colors cursor-pointer'
+              className='absolute top-4 right-4 text-white/60 hover:text-white transition-colors'
               aria-label='Close'
             >
               <Cross className='w-4 h-4' />
             </button>
 
-            {/* Avatar */}
             <div className='flex justify-center mb-4'>
               <div className='w-16 h-16 rounded-full bg-linear-to-r from-green-400 to-blue-500' />
             </div>
 
-            {/* Address */}
             <div className='text-center mb-6'>
-              <p className='text-white text-sm font-mono break-all'>{address}</p>
+              <Text size='sm' className='text-white break-all'>
+                {address}
+              </Text>
             </div>
 
-            {/* Action buttons */}
             <div className='flex gap-3 mb-4'>
               <button
                 onClick={handleCopyAddress}
-                className='flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm transition-colors cursor-pointer'
+                className={classNames(buttonBaseStyles, 'flex-1 justify-center py-3')}
               >
                 <Copy className='w-4 h-4' />
                 Copy Address
               </button>
               <button
                 onClick={handleViewOnExplorer}
-                className='flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm transition-colors cursor-pointer'
+                className={classNames(buttonBaseStyles, 'flex-1 justify-center py-3')}
               >
                 <ExternalLink className='w-4 h-4' />
                 View on Explorer
               </button>
             </div>
 
-            {/* Logout button */}
             <button
               onClick={handleDisconnect}
-              className='w-full flex items-center justify-center gap-2 px-4 py-3 rounded-sm border border-white/20 hover:bg-white/5 text-white text-sm transition-colors mb-6 cursor-pointer'
+              className={classNames(
+                buttonBaseStyles,
+                'w-full justify-center py-3 border-white/20 hover:bg-white/5 mb-6',
+              )}
             >
               Logout
             </button>
-
-            {/* Transaction history section */}
-            {/* <div className='bg-black/20 rounded-sm p-4'>
-              <p className='text-white/60 text-sm text-center'>
-                Your transactions will appear here
-              </p>
-            </div> */}
           </div>
         </Overlay>
       </>
@@ -120,12 +107,12 @@ export default function WalletConnectButton() {
 
   return (
     <button
-      onClick={handleConnect}
+      onClick={connect}
       disabled={isWalletConnecting}
-      className='flex items-center gap-2 px-4 py-2 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+      className={classNames(buttonBaseStyles, 'disabled:opacity-50 disabled:cursor-not-allowed')}
     >
       <Wallet className='w-4 h-4' />
-      <span>{isWalletConnecting ? 'Connecting...' : 'Connect Wallet'}</span>
+      {isWalletConnecting ? 'Connecting...' : 'Connect Wallet'}
     </button>
   )
 }

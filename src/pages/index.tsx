@@ -1,11 +1,17 @@
-import { BrowserRouter } from 'react-router-dom'
+import MainPage from 'pages/MainPage'
+import Layout from 'pages/_layout'
 
-import Routes from 'components/header/navigation/Routes'
+// Force server-side rendering to prevent static generation
+export async function getServerSideProps() {
+  return {
+    props: {},
+  }
+}
 
-export default function Router() {
+export default function Home() {
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Layout>
+      <MainPage />
+    </Layout>
   )
 }

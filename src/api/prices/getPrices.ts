@@ -1,34 +1,34 @@
-import getOraclePrices from 'api/prices/getOraclePrices'
-import fetchPythPrices from 'api/prices/getPythPrices'
-import { BNCoin } from 'types/classes/BNCoin'
+// import getOraclePrices from 'api/prices/getOraclePrices'
+// import fetchPythPrices from 'api/prices/getPythPrices'
+// import { BNCoin } from 'types/classes/BNCoin'
 
-export default async function getPrices(
-  chainConfig: ChainConfig,
-  assets: Asset[],
-): Promise<BNCoin[]> {
-  const pythAndOraclePrices = []
-  const assetsToFetchPrices = assets.filter((asset) => asset.isWhitelisted)
+// export default async function getPrices(
+//   chainConfig: ChainConfig,
+//   assets: Asset[],
+// ): Promise<BNCoin[]> {
+//   const pythAndOraclePrices = []
+//   const assetsToFetchPrices = assets.filter((asset) => asset.isWhitelisted)
 
-  const assetsWithPythPriceFeedId = assets.filter((asset) => asset.pythPriceFeedId)
-  const assetsWithOraclePrices = assetsToFetchPrices.filter((asset) => !asset.pythPriceFeedId)
-  const pythPrices = await requestPythPrices(assetsWithPythPriceFeedId)
+//   const assetsWithPythPriceFeedId = assets.filter((asset) => asset.pythPriceFeedId)
+//   const assetsWithOraclePrices = assetsToFetchPrices.filter((asset) => !asset.pythPriceFeedId)
+//   const pythPrices = await requestPythPrices(assetsWithPythPriceFeedId)
 
-  pythAndOraclePrices.push(...pythPrices)
+//   pythAndOraclePrices.push(...pythPrices)
 
-  try {
-    const oraclePrices: BNCoin[] = await getOraclePrices(chainConfig, assetsWithOraclePrices)
-    return [...pythAndOraclePrices, ...oraclePrices]
-  } catch (ex) {
-    console.error(ex)
-    return [...pythAndOraclePrices]
-  }
-}
+//   try {
+//     const oraclePrices: BNCoin[] = await getOraclePrices(chainConfig, assetsWithOraclePrices)
+//     return [...pythAndOraclePrices, ...oraclePrices]
+//   } catch (ex) {
+//     console.error(ex)
+//     return [...pythAndOraclePrices]
+//   }
+// }
 
-async function requestPythPrices(assets: Asset[]): Promise<BNCoin[]> {
-  if (!assets.length) return []
+// async function requestPythPrices(assets: Asset[]): Promise<BNCoin[]> {
+//   if (!assets.length) return []
 
-  const priceFeedIds = assets
-    .map((a) => a.pythPriceFeedId)
-    .filter((priceFeedId, index, array) => array.indexOf(priceFeedId) === index) as string[]
-  return await fetchPythPrices(priceFeedIds, assets)
-}
+//   const priceFeedIds = assets
+//     .map((a) => a.pythPriceFeedId)
+//     .filter((priceFeedId, index, array) => array.indexOf(priceFeedId) === index) as string[]
+//   return await fetchPythPrices(priceFeedIds, assets)
+// }

@@ -1157,9 +1157,7 @@ interface V1BorrowAndRepayModal {
 
 interface Settings {
   theme: string
-  displayCurrency: string
   reduceMotion: boolean
-  perpsAsset: string
 }
 
 interface KeyValuePair {

@@ -20,8 +20,8 @@ export default function StyledRow<T>(props: Props<T>) {
             'border-solid -skew-x-25',
             {
               'border-[#FF4D4D69]': rank === 1,
-              'border-[#FF8C8C69]': rank === 2,
-              'border-[#B31F1F69]': rank === 3,
+              'border-[#B31F1F69]': rank === 2,
+              'border-[#FF8C8C69]': rank === 3,
               'border-white/10': rank > 3 || rank === 0,
               'border-2': rank <= 3,
               border: rank > 3,
