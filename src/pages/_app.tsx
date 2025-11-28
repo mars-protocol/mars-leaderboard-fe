@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
 
 import DefaultPageHead from 'components/common/DefaultPageHead'
+import PageMetadata from 'components/common/PageMetadata'
 
 import 'styles/globals.css'
 
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
       <>
         <DefaultPageHead />
+        <PageMetadata />
         <div style={{ minHeight: '100vh' }} />
       </>
     )
@@ -25,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultPageHead />
+      <PageMetadata />
       <PageComponent {...pageProps} />
     </>
   )

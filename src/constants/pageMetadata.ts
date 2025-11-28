@@ -16,9 +16,8 @@ const PAGE_METADATA = {
       'decentralized credit accounts',
       'credit accounts',
     ],
-    // TODO: update
     url: 'https://fragments.marsprotocol.io',
-    image: 'https://fragments.marsprotocol.io/banner.jpg',
+    image: 'https://fragments.marsprotocol.io/fragments_banner.jpg',
     siteName: 'Mars Protocol Leaderboard',
   },
 }

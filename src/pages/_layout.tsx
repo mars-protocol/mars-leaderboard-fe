@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { Suspense } from 'react'
 
 import Footer from 'components/common/Footer'
-import PageMetadata from 'components/common/PageMetadata'
 import Header from 'components/header/Header'
 import { CosmosKitProvider } from 'components/providers/CosmosKitProvider'
 
@@ -16,7 +15,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <CosmosKitProvider>
       <Suspense>
-        <PageMetadata />
         <Header />
         <main
           className={classNames(

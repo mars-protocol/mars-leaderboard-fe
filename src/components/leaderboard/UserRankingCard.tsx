@@ -104,7 +104,7 @@ export default function UserRankingCard() {
                         })
                       : '-'
                 }
-                label='Est. MARS Reward'
+                label='Est. MARS Rewards'
                 isLoading={showLoading}
               />
             </div>
