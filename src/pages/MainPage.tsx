@@ -7,13 +7,6 @@ import UserRankingCard from 'components/leaderboard/UserRankingCard'
 import Text from 'components/common/Text'
 import { useEffect, useRef } from 'react'
 
-// Force server-side rendering to prevent static generation
-export async function getServerSideProps() {
-  return {
-    props: {},
-  }
-}
-
 export default function MainPage() {
   const {
     data: fragmentLeaderboard,

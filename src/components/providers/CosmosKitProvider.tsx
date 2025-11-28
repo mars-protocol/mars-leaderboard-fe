@@ -88,6 +88,7 @@ export const CosmosKitProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     },
   }
 
+  // Always render ChainProvider - it handles SSR internally
   return (
     <ChainProvider
       chains={chainNames}
