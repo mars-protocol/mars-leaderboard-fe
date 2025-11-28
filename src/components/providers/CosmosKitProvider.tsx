@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { GasPrice } from '@cosmjs/stargate'
 import { wallets as cosmostationWallets } from '@cosmos-kit/cosmostation'
@@ -41,11 +41,22 @@ const wallets = [
 ]
 
 export const CosmosKitProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isClient, setIsClient] = useState(false)
+
+  // Get the theme configuration
   const modalTheme = getCosmosKitTheme()
+
+  // Ensure we're on the client side before checking for wallets
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  // Use all wallets like before
   const availableWallets = wallets
 
+  // Enhanced error handling for wallet initialization
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (!isClient) return
 
     console.error = (...args) => {
       // Convert arguments to string for analysis
@@ -58,7 +69,8 @@ export const CosmosKitProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         message.includes('initClientError: Client Not Exist!') ||
         message.includes('initClientError: `projectId` is not provided') ||
         message.includes('walletconnectOptions') ||
-        (message.includes('dummy-project-id') && message.includes('WalletConnect'))
+        (message.includes('dummy-project-id') && message.includes('WalletConnect')) ||
+        message.includes('chain id not set')
       ) {
         return
       }
@@ -71,7 +83,7 @@ export const CosmosKitProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     return () => {
       console.error = console.warn
     }
-  }, [])
+  }, [isClient])
 
   // Always provide walletConnectOptions but handle missing project ID gracefully
   const walletConnectProjectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
@@ -88,7 +100,8 @@ export const CosmosKitProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     },
   }
 
-  // Always render ChainProvider - it handles SSR internally
+  // Always render ChainProvider (it handles SSR internally with throwErrors={false})
+  // The _app.tsx SSR guard ensures this only runs on client
   return (
     <ChainProvider
       chains={chainNames}
