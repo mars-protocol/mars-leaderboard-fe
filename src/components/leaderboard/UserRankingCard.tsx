@@ -7,7 +7,7 @@ import { StatCard } from 'components/common/StatCard'
 import Text from 'components/common/Text'
 import chainConfig from 'config/chain'
 import useFragmentLeaderboardByAddress from 'hooks/leaderboard/useFragmentLeaderboardByAddress'
-import { useEstimatedMarsRewards } from 'hooks/leaderboard/useTotalFragments'
+import { useEstimatedMarsRewards, useTotalFragments } from 'hooks/leaderboard/useTotalFragments'
 import { formatValue } from 'utils/formatters'
 import { BN } from 'utils/helpers'
 
@@ -15,12 +15,11 @@ export default function UserRankingCard() {
   const chainName = chainConfig.name
   const { isWalletConnected, address, isWalletConnecting } = useChain(chainName)
   const { data: userEntry, isLoading } = useFragmentLeaderboardByAddress(address)
+  const totalFragments = useTotalFragments()
 
   const userFragments = userEntry ? BN(userEntry.total_fragments).toNumber() : null
-  const totalFragments = 45_000_000
   const estimatedRewards = useEstimatedMarsRewards(userFragments, totalFragments)
-
-  const showLoading = Boolean(isWalletConnecting || (address && (isLoading || !userEntry)))
+  const showLoading = Boolean(isWalletConnecting || (address && isLoading))
 
   if (!isWalletConnected && !isWalletConnecting && !address) {
     return (
@@ -37,9 +36,10 @@ export default function UserRankingCard() {
     )
   }
 
-  const fragments = userEntry ? BN(userEntry.total_fragments).toNumber() : null
+  const fragments = userEntry ? BN(userEntry.total_fragments).toNumber() : 0
   const formattedRank = userEntry ? userEntry.rank.toString().padStart(2, '0') : null
   const truncatedAddress = address ? `${address.slice(0, 8)}...${address.slice(-6)}` : null
+  const hasNoFragments = address && !isLoading && !userEntry
 
   return (
     <section className='relative py-4 md:py-8 md:mb-4'>
@@ -50,7 +50,7 @@ export default function UserRankingCard() {
             <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25 md:hidden' />
             <div className='relative z-10'>
               <StatCard
-                value={formattedRank ? `#${formattedRank}` : ''}
+                value={formattedRank ? `#${formattedRank}` : hasNoFragments ? '-' : ''}
                 label='Your Ranking'
                 isLoading={showLoading}
               />
@@ -74,13 +74,13 @@ export default function UserRankingCard() {
             <div className='relative z-10'>
               <StatCard
                 value={
-                  fragments !== null
-                    ? formatValue(fragments, {
+                  hasNoFragments
+                    ? '0'
+                    : formatValue(fragments, {
                         minDecimals: 0,
                         maxDecimals: 0,
                         thousandSeparator: true,
                       })
-                    : ''
                 }
                 label='Your Fragments'
                 isLoading={showLoading}
@@ -93,14 +93,16 @@ export default function UserRankingCard() {
             <div className='relative z-10'>
               <StatCard
                 value={
-                  estimatedRewards !== null
-                    ? formatValue(estimatedRewards, {
-                        minDecimals: 0,
-                        maxDecimals: 0,
-                        thousandSeparator: true,
-                        abbreviated: true,
-                      })
-                    : '-'
+                  hasNoFragments
+                    ? '0'
+                    : estimatedRewards !== null
+                      ? formatValue(estimatedRewards, {
+                          minDecimals: 0,
+                          maxDecimals: 0,
+                          thousandSeparator: true,
+                          abbreviated: true,
+                        })
+                      : '-'
                 }
                 label='Est. MARS Reward'
                 isLoading={showLoading}

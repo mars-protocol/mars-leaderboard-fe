@@ -1,11 +1,27 @@
 import { useMemo } from 'react'
+import useFragmentLeaderboard from 'hooks/leaderboard/useFragmentLeaderboard'
+import { BN } from 'utils/helpers'
 
 const TOTAL_REWARD_POOL = 45_000_000 // 45M MARS
 
-/**
- * Hook to estimate MARS rewards based on user fragments and total fragments
- * Formula: (User Fragments / Total Fragments) × 45,000,000 MARS
- */
+export function useTotalFragments() {
+  const { data: fragmentLeaderboard } = useFragmentLeaderboard(50)
+
+  const totalFragments = useMemo(() => {
+    if (!fragmentLeaderboard || fragmentLeaderboard.length === 0) {
+      return null
+    }
+
+    const sum = fragmentLeaderboard.reduce((acc, entry) => {
+      return acc.plus(BN(entry.total_fragments))
+    }, BN(0))
+
+    return sum.toNumber()
+  }, [fragmentLeaderboard])
+
+  return totalFragments
+}
+
 export function useEstimatedMarsRewards(
   userFragments: number | null,
   totalFragments: number | null,

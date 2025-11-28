@@ -2,10 +2,10 @@ import chainConfig from 'config/chain'
 import { FETCH_TIMEOUT } from 'constants/query'
 import { fetchWithTimeout } from 'utils/fetch'
 
-export default async function getFragmentLeaderboard(page = 1) {
+export default async function getFragmentLeaderboard(page = 1, limit = 50) {
   try {
     const baseUrl = chainConfig.endpoints.amberBackend
-    const path = `/fragments/leaderboard?chain=neutron&page=${page}&limit=25`
+    const path = `/fragments/leaderboard?chain=neutron&page=${page}&limit=${limit}`
 
     const response = await fetchWithTimeout(`${baseUrl}${path}`, FETCH_TIMEOUT)
 
@@ -13,7 +13,7 @@ export default async function getFragmentLeaderboard(page = 1) {
       return {
         data: [],
         page: page,
-        limit: 25,
+        limit: limit,
         total: 0,
         last_updated: 0,
       }
@@ -26,7 +26,7 @@ export default async function getFragmentLeaderboard(page = 1) {
     return {
       data: [],
       page: page,
-      limit: 25,
+      limit: limit,
       total: 0,
       last_updated: 0,
     }
