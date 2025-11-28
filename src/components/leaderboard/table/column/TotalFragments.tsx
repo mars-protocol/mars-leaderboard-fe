@@ -23,9 +23,9 @@ export default function TotalFragments(props: Props) {
 
   if (isLoading) {
     return (
-      <div className='flex items-center justify-end gap-2'>
-        <MarsFragments className='w-4 h-4 text-white' />
-        <Loading className='h-4 w-18' />
+      <div className='flex items-center justify-end gap-1 md:gap-2'>
+        <MarsFragments className='w-3 h-3 md:w-4 md:h-4 text-white' />
+        <Loading className='h-3 w-12 md:h-4 md:w-18' />
       </div>
     )
   }
@@ -33,8 +33,8 @@ export default function TotalFragments(props: Props) {
   const fragments = BN(value.total_fragments).toNumber()
 
   return (
-    <div className='flex items-center justify-end gap-2'>
-      <MarsFragments className='w-4 h-4 text-white' />
+    <div className='flex items-center justify-end gap-1 md:gap-2'>
+      <MarsFragments className='w-3 h-3 md:w-4 md:h-4 text-white' />
       <FormattedNumber
         amount={fragments}
         options={{
@@ -42,7 +42,7 @@ export default function TotalFragments(props: Props) {
           maxDecimals: 0,
           thousandSeparator: true,
         }}
-        className='text-white'
+        className='text-white text-xs md:text-sm'
       />
     </div>
   )

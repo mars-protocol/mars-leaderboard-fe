@@ -30,9 +30,9 @@ export default function Footer() {
 
   return (
     <footer className='mt-auto border-t border-white/10'>
-      <div className='px-4 py-8 mx-auto max-w-content md:px-6'>
-        <div className='flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12'>
-          <div className='flex gap-3 items-center'>
+      <div className='px-4 py-8 mx-auto max-w-content sm:px-6'>
+        <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-8 sm:gap-12'>
+          <div className='flex gap-3 items-center justify-center'>
             {socialLinks.map((social) => {
               const IconComponent = social.icon
               return (
@@ -50,7 +50,7 @@ export default function Footer() {
             })}
           </div>
 
-          <div className='flex items-center gap-6'>
+          <div className='flex items-center justify-center gap-6'>
             <a
               href='https://app.marsprotocol.io'
               target='_blank'
@@ -80,7 +80,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className='pt-4'>
-          <Text size='sm' className='text-left text-white/60'>
+          <Text size='sm' className='text-center sm:text-left text-white/60'>
             © {currentYear} Mars Protocol. All rights reserved.
           </Text>
         </div>

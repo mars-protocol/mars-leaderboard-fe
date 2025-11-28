@@ -42,9 +42,9 @@ export default function FragmentStats() {
   )
 
   return (
-    <section ref={statsRef} className='relative pb-16 pt-8'>
+    <section ref={statsRef} className='relative pb-4 pt-4 md:pb-16 md:pt-8'>
       <div className='container max-w-screen-xl px-4'>
-        <div className='flex flex-col items-center justify-center gap-8 md:flex-row md:items-start md:gap-16'>
+        <div className='flex flex-col items-center justify-center gap-2 sm:flex-row md:items-start md:gap-16'>
           {stats.map((stat, index) => (
             <div key={stat.label} className='contents'>
               <motion.div

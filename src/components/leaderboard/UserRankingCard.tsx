@@ -24,7 +24,7 @@ export default function UserRankingCard() {
 
   if (!isWalletConnected && !isWalletConnecting && !address) {
     return (
-      <section className='relative py-8'>
+      <section className='relative py-4 md:py-8 md:mb-4'>
         <div className='container mx-auto max-w-screen-xl px-4'>
           <div className='flex flex-col items-center justify-center gap-6 py-4 md:flex-row md:items-start md:gap-12'>
             <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25' />
@@ -42,51 +42,71 @@ export default function UserRankingCard() {
   const truncatedAddress = address ? `${address.slice(0, 8)}...${address.slice(-6)}` : null
 
   return (
-    <section className='relative py-8'>
+    <section className='relative py-4 md:py-8 md:mb-4'>
       <div className='container mx-auto max-w-screen-xl px-4'>
-        <div className='flex flex-col items-center justify-center gap-6 py-4 md:flex-row md:items-start md:gap-12'>
-          <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25' />
-          <StatCard
-            value={formattedRank ? `#${formattedRank}` : ''}
-            label='Your Ranking'
-            isLoading={showLoading}
-          />
+        <div className='flex flex-col items-center justify-center gap-2 py-4 md:flex-row md:items-start md:gap-12'>
+          <div className='hidden md:block absolute inset-0 m-1 border border-white/10 -skew-x-25' />
+          <div className='relative w-full md:w-auto py-4 md:py-0'>
+            <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25 md:hidden' />
+            <div className='relative z-10'>
+              <StatCard
+                value={formattedRank ? `#${formattedRank}` : ''}
+                label='Your Ranking'
+                isLoading={showLoading}
+              />
+            </div>
+          </div>
           <Divider />
-          <StatCard
-            value={truncatedAddress || ''}
-            label='Wallet Address'
-            size='text-sm mt-6'
-            isLoading={showLoading}
-          />
+          <div className='relative w-full md:w-auto py-4 md:py-0'>
+            <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25 md:hidden' />
+            <div className='relative z-10'>
+              <StatCard
+                value={truncatedAddress || ''}
+                label='Wallet Address'
+                size='text-sm md:mt-6'
+                isLoading={showLoading}
+              />
+            </div>
+          </div>
           <Divider />
-          <StatCard
-            value={
-              fragments !== null
-                ? formatValue(fragments, {
-                    minDecimals: 0,
-                    maxDecimals: 0,
-                    thousandSeparator: true,
-                  })
-                : ''
-            }
-            label='Your Fragments'
-            isLoading={showLoading}
-          />
+          <div className='relative w-full md:w-auto py-4 md:py-0'>
+            <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25 md:hidden' />
+            <div className='relative z-10'>
+              <StatCard
+                value={
+                  fragments !== null
+                    ? formatValue(fragments, {
+                        minDecimals: 0,
+                        maxDecimals: 0,
+                        thousandSeparator: true,
+                      })
+                    : ''
+                }
+                label='Your Fragments'
+                isLoading={showLoading}
+              />
+            </div>
+          </div>
           <Divider />
-          <StatCard
-            value={
-              estimatedRewards !== null
-                ? formatValue(estimatedRewards, {
-                    minDecimals: 0,
-                    maxDecimals: 0,
-                    thousandSeparator: true,
-                    abbreviated: true,
-                  })
-                : '-'
-            }
-            label='Est. MARS Reward'
-            isLoading={showLoading}
-          />
+          <div className='relative w-full md:w-auto py-4 md:py-0'>
+            <div className='absolute inset-0 m-1 border border-white/10 -skew-x-25 md:hidden' />
+            <div className='relative z-10'>
+              <StatCard
+                value={
+                  estimatedRewards !== null
+                    ? formatValue(estimatedRewards, {
+                        minDecimals: 0,
+                        maxDecimals: 0,
+                        thousandSeparator: true,
+                        abbreviated: true,
+                      })
+                    : '-'
+                }
+                label='Est. MARS Reward'
+                isLoading={showLoading}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

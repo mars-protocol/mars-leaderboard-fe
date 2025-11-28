@@ -1,20 +1,18 @@
 'use client'
 
-import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useChain } from '@cosmos-kit/react'
 
+import Button from 'components/common/Button'
 import Overlay from 'components/common/Overlay'
 import Text from 'components/common/Text'
 import { Copy, Cross, ExternalLink, Wallet } from 'components/common/Icons'
 import chainConfig from 'config/chain'
 
-const buttonBaseStyles =
-  'flex items-center gap-2 px-4 py-2 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm transition-colors'
-
 export default function WalletConnectButton() {
   const [showModal, setShowModal] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   const { connect, isWalletConnecting, isWalletConnected, address, disconnect } = useChain(
     chainConfig.name,
@@ -29,10 +27,18 @@ export default function WalletConnectButton() {
     if (!address) return
     try {
       await navigator.clipboard.writeText(address)
+      setCopied(true)
     } catch (err) {
       console.error('Failed to copy address:', err)
     }
   }
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => setCopied(false), 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [copied])
 
   const handleViewOnExplorer = () => {
     if (address) {
@@ -45,10 +51,9 @@ export default function WalletConnectButton() {
 
     return (
       <>
-        <button onClick={() => setShowModal(true)} className={buttonBaseStyles}>
-          <Wallet className='w-4 h-4' />
+        <Button onClick={() => setShowModal(true)} leftIcon={<Wallet className='w-4 h-4' />}>
           {truncatedAddress}
-        </button>
+        </Button>
         <Overlay
           show={showModal}
           setShow={setShowModal}
@@ -74,31 +79,28 @@ export default function WalletConnectButton() {
             </div>
 
             <div className='flex gap-3 mb-4'>
-              <button
+              <Button
                 onClick={handleCopyAddress}
-                className={classNames(buttonBaseStyles, 'flex-1 justify-center py-3')}
+                className='flex-1 justify-center py-3'
+                leftIcon={<Copy className='w-4 h-4' />}
               >
-                <Copy className='w-4 h-4' />
-                Copy Address
-              </button>
-              <button
+                {copied ? 'Copied!' : 'Copy Address'}
+              </Button>
+              <Button
                 onClick={handleViewOnExplorer}
-                className={classNames(buttonBaseStyles, 'flex-1 justify-center py-3')}
+                className='flex-1 justify-center py-3'
+                leftIcon={<ExternalLink className='w-4 h-4' />}
               >
-                <ExternalLink className='w-4 h-4' />
                 View on Explorer
-              </button>
+              </Button>
             </div>
 
-            <button
+            <Button
               onClick={handleDisconnect}
-              className={classNames(
-                buttonBaseStyles,
-                'w-full justify-center py-3 border-white/20 hover:bg-white/5 mb-6',
-              )}
+              className='w-full justify-center py-3 border-white/20 hover:bg-white/5 mb-6'
             >
               Logout
-            </button>
+            </Button>
           </div>
         </Overlay>
       </>
@@ -106,13 +108,13 @@ export default function WalletConnectButton() {
   }
 
   return (
-    <button
+    <Button
       onClick={connect}
       disabled={isWalletConnecting}
-      className={classNames(buttonBaseStyles, 'disabled:opacity-50 disabled:cursor-not-allowed')}
+      className='disabled:opacity-50 disabled:cursor-not-allowed'
+      leftIcon={<Wallet className='w-4 h-4' />}
     >
-      <Wallet className='w-4 h-4' />
       {isWalletConnecting ? 'Connecting...' : 'Connect Wallet'}
-    </button>
+    </Button>
   )
 }

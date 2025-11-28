@@ -36,8 +36,8 @@ export default function Rank(props: Props) {
     <Text
       className={classNames(
         isTopThree
-          ? 'text-white font-bold italic text-[22px]'
-          : 'text-white/60 font-normal text-sm',
+          ? 'text-white font-bold italic text-base md:text-[22px]'
+          : 'text-white/60 font-normal text-xs md:text-sm',
       )}
     >
       {formattedRank}

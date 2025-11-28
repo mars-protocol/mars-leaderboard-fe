@@ -11,13 +11,14 @@ export default function StyledRow<T>(props: Props<T>) {
 
   return (
     <>
-      <tr key={`${row.id}-row`} className='group relative h-14'>
+      <tr key={`${row.id}-row`} className='group relative h-10 md:h-14 z-0'>
         <td
           colSpan={row.getVisibleCells().length}
           className={classNames(
-            'absolute inset-0 my-1 mx-2 transition-all duration-200 group-hover:bg-white/5',
+            'absolute inset-0 mt-0 mb-1 mx-2 transition-all duration-200 group-hover:bg-white/5',
             'bg-linear-to-r from-white/3 to-white/1',
             'border-solid -skew-x-25',
+            'z-0',
             {
               'border-[#FF4D4D69]': rank === 1,
               'border-[#B31F1F69]': rank === 2,
@@ -32,7 +33,7 @@ export default function StyledRow<T>(props: Props<T>) {
           <td
             key={cell.id}
             className={classNames(
-              'text-sm text-white/80 text-right px-16 relative z-10',
+              'text-xs md:text-sm text-white/80 text-right px-4 md:px-16 relative z-10',
               cell.column.columnDef.meta?.className,
             )}
           >

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'motion/react'
 import { MarsFragments } from 'components/common/Icons'
 
@@ -92,22 +92,35 @@ export default function IntroRightColumn() {
   const iconRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const iconInView = useInView(iconRef, { once: true })
+  const [isMobile, setIsMobile] = useState(true)
+
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
-    <div className='relative w-full lg:w-1/2 flex items-center justify-center lg:justify-end mt-16'>
+    <div className='absolute top-0 right-0 md:relative md:w-1/2 flex items-center justify-center md:justify-end md:mt-16 pointer-events-none md:pointer-events-auto z-0 opacity-20 md:opacity-100'>
       <motion.div
         ref={iconRef}
-        className='relative z-60 cursor-pointer'
+        className='relative z-0 md:z-60 md:cursor-pointer'
         animate={iconInView ? 'animate' : 'initial'}
         variants={iconVariants}
         initial={false}
         transition={iconTransition}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => {
+          if (!isMobile) setIsHovered(true)
+        }}
+        onMouseLeave={() => {
+          if (!isMobile) setIsHovered(false)
+        }}
       >
         {/* Interactive Floating Triangles */}
         <motion.div
-          className='relative w-70 h-70 md:w-100 md:h-100 lg:w-120 lg:h-120'
+          className='relative w-40 h-40 md:w-100 md:h-100'
           style={{
             filter: isHovered
               ? 'drop-shadow(0 0 30px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.1))'
@@ -213,7 +226,14 @@ export default function IntroRightColumn() {
                   key={triangle.id}
                   initial={assembledState}
                   animate={
-                    isHovered ? assembledState : iconInView ? scatteredState : assembledState
+                    // On mobile, keep assembled; on desktop, use hover/scatter logic
+                    isMobile
+                      ? assembledState
+                      : isHovered
+                        ? assembledState
+                        : iconInView
+                          ? scatteredState
+                          : assembledState
                   }
                   transition={
                     isHovered
@@ -264,12 +284,13 @@ export default function IntroRightColumn() {
               initial={{ opacity: 1 }}
               animate={{ opacity: isHovered ? 1 : iconInView ? 0 : 1 }}
               transition={{ duration: 0.3, delay: isHovered ? 0.2 : iconInView ? 0.8 : 0 }}
+              className='hidden md:block'
             />
           </svg>
         </motion.div>
       </motion.div>
 
-      <div className='absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-30'>
+      <div className='absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-20 md:opacity-30'>
         <div
           className='relative'
           style={{
@@ -286,7 +307,7 @@ export default function IntroRightColumn() {
             initial={{ y: 0, rotate: 0, scale: 1 }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <MarsFragments className='w-80 h-80 md:w-126 md:h-126 lg:w-150 lg:h-150' />
+            <MarsFragments className='w-40 h-40 md:w-126 md:h-126' />
           </motion.div>
         </div>
       </div>
