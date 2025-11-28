@@ -8,7 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import classNames from 'classnames'
-import React, { ReactElement, useEffect } from 'react'
+import { useState } from 'react'
 
 import Card from 'components/common/Card'
 import { SortAsc, SortDesc, SortNone } from 'components/common/Icons'
@@ -17,13 +17,11 @@ import Text from 'components/common/Text'
 import ConditionalWrapper from 'hocs/ConditionalWrapper'
 
 interface Props<T> {
-  title: string | ReactElement
   columns: ColumnDef<T>[]
   data: T[]
   initialSorting: SortingState
   onSortingChange?: OnChangeFn<SortingState>
-  disableSortingRow?: boolean
-  tableBodyClassName?: string
+  tableClassName?: string
   type?: TableType
   hideCard?: boolean
   setRowSelection?: OnChangeFn<RowSelectionState>
@@ -32,41 +30,32 @@ interface Props<T> {
 
 export default function Table<T>(props: Props<T>) {
   const {
-    title,
     columns,
     initialSorting,
     onSortingChange,
     data,
-    tableBodyClassName,
+    tableClassName,
     type,
     hideCard,
     selectedRows,
     setRowSelection,
   } = props
 
-  const [internalSorting, setInternalSorting] = React.useState<SortingState>(initialSorting)
-
-  useEffect(() => {
-    setInternalSorting(props.initialSorting)
-  }, [props.initialSorting])
-
+  const [internalSorting, setInternalSorting] = useState<SortingState>(initialSorting)
   const sorting = onSortingChange ? initialSorting : internalSorting
-  const sortingChange = onSortingChange ?? setInternalSorting
+  const handleSortingChange = onSortingChange ?? setInternalSorting
 
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
-      rowSelection: selectedRows,
+      ...(selectedRows !== undefined && { rowSelection: selectedRows }),
     },
     manualSorting: true,
-    enableRowSelection: true,
+    enableRowSelection: !!setRowSelection,
     onRowSelectionChange: setRowSelection,
-    onSortingChange: (newSorting) => {
-      sortingChange(newSorting)
-      if (!onSortingChange) setInternalSorting(newSorting)
-    },
+    onSortingChange: handleSortingChange,
     getCoreRowModel: getCoreRowModel(),
   })
 
@@ -82,7 +71,7 @@ export default function Table<T>(props: Props<T>) {
         </Card>
       )}
     >
-      <table className={classNames('w-full max-w-[98%] mx-auto', tableBodyClassName)}>
+      <table className={classNames('w-full max-w-[98%] mx-auto', tableClassName)}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className='relative h-12'>
@@ -124,13 +113,11 @@ export default function Table<T>(props: Props<T>) {
                     </Text>
                     {header.column.getCanSort() && (
                       <span className='w-4 h-4 text-white'>
-                        {header.column.getCanSort()
-                          ? ({
-                              asc: <SortAsc size={16} />,
-                              desc: <SortDesc />,
-                              false: <SortNone />,
-                            }[header.column.getIsSorted() as string] ?? null)
-                          : null}
+                        {{
+                          asc: <SortAsc size={16} />,
+                          desc: <SortDesc />,
+                          false: <SortNone />,
+                        }[header.column.getIsSorted() as string] ?? null}
                       </span>
                     )}
                   </div>

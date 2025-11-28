@@ -1,19 +1,23 @@
 'use client'
 
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { motion, useInView } from 'motion/react'
+import dayjs from 'dayjs'
+import { Divider } from 'components/common/Divider'
 
 const fadeUpVariants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
 }
 
-const stats = [
-  { label: 'MARS in Reward Pool', value: '45M', delay: 0.1 },
-  { label: 'Fragment per USD a day', value: '1', delay: 0.2 },
-  { label: 'Daily Snapshots', value: '2', delay: 0.3 },
-  { label: 'days remaining', value: '278', delay: 0.4 },
-]
+// Campaign end date: September 1st, 2026 (end of day UTC)
+const CAMPAIGN_END_DATE = dayjs('2026-09-01T23:59:59Z')
+
+const calculateDaysRemaining = (): string => {
+  const now = dayjs()
+  const diffDays = Math.ceil(CAMPAIGN_END_DATE.diff(now, 'day', true))
+  return diffDays > 0 ? diffDays.toString() : '0'
+}
 
 const getTransition = (delay: number) => ({
   duration: 0.6,
@@ -24,6 +28,18 @@ const getTransition = (delay: number) => ({
 export default function FragmentStats() {
   const statsRef = useRef(null)
   const statsInView = useInView(statsRef, { once: true, margin: '-100px' })
+
+  const daysRemaining = useMemo(() => calculateDaysRemaining(), [])
+
+  const stats = useMemo(
+    () => [
+      { label: 'MARS in Reward Pool', value: '45M', delay: 0.1 },
+      { label: 'Fragment per USD a day', value: '1', delay: 0.2 },
+      { label: 'Daily Snapshots', value: '2', delay: 0.3 },
+      { label: 'days remaining', value: daysRemaining, delay: 0.4 },
+    ],
+    [daysRemaining],
+  )
 
   return (
     <section ref={statsRef} className='relative pb-16 pt-8'>
@@ -45,9 +61,7 @@ export default function FragmentStats() {
                   {stat.label}
                 </p>
               </motion.div>
-              {index < stats.length - 1 && (
-                <div className='hidden h-px w-16 shrink-0 bg-linear-to-r from-transparent via-white/40 to-transparent md:block md:mt-[2.25rem]' />
-              )}
+              {index < stats.length - 1 && <Divider width='w-16' marginTop='md:mt-14' />}
             </div>
           ))}
         </div>

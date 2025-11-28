@@ -1,27 +1,56 @@
 import getFragmentLeaderboard from 'api/leaderboard/getFragmentLeaderboard'
 import chainConfig from 'config/chain'
-import useSWR from 'swr'
+import useSWRInfinite from 'swr/infinite'
 
-export default function useFragmentLeaderboard(page: number) {
-  return useSWR(
-    chainConfig.endpoints.amberBackend
-      ? `chains/${chainConfig.id}/fragmentLeaderboard/${page}`
-      : null,
-    async () => {
-      const response = await getFragmentLeaderboard(page)
-      console.log(response, 'response')
+interface FragmentLeaderboardResponse {
+  data: FragmentLeaderboardEntry[]
+  page: number
+  limit: number
+  total: number
+  last_updated: number
+}
 
-      if (Array.isArray(response)) return []
+export default function useFragmentLeaderboard(pageSize = 25) {
+  const getKey = (pageIndex: number, previousPageData: FragmentLeaderboardResponse | null) => {
+    if (!chainConfig.endpoints.amberBackend) return null
+    if (previousPageData && previousPageData.data.length < pageSize) {
+      return null
+    }
 
-      if (response?.data && Array.isArray(response.data)) {
-        return response.data as FragmentLeaderboardEntry[]
-      }
+    return chainConfig.endpoints.amberBackend
+      ? ['fragmentLeaderboard', chainConfig.id, pageIndex + 1, pageSize]
+      : null
+  }
 
-      return []
-    },
-    {
-      revalidateOnFocus: false,
-      suspense: false,
-    },
-  )
+  const { data, size, setSize, isLoading, isValidating } =
+    useSWRInfinite<FragmentLeaderboardResponse>(
+      getKey,
+      async ([, , page]) => {
+        const response = await getFragmentLeaderboard(Number(page))
+        return response as FragmentLeaderboardResponse
+      },
+      {
+        revalidateOnFocus: false,
+      },
+    )
+
+  const fragmentLeaderboard = data?.flatMap((page) => page.data) ?? []
+  const totalLoaded = fragmentLeaderboard.length
+  const totalAvailable = data?.[0]?.total ?? 0
+
+  const hasMore = totalLoaded < totalAvailable
+
+  const loadMore = () => {
+    if (!isValidating && hasMore) {
+      setSize(size + 1)
+    }
+  }
+
+  return {
+    data: fragmentLeaderboard,
+    isLoading,
+    hasMore,
+    loadMore,
+    isValidating,
+  }
 }

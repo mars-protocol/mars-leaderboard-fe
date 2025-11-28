@@ -5,11 +5,9 @@ import Text from 'components/common/Text'
 
 export const RANK_META: ColumnDef<FragmentLeaderboardEntry> = {
   id: 'rank',
-  accessorKey: 'rank',
   header: 'Rank',
-  enableSorting: true,
   meta: {
-    className: 'text-left',
+    className: 'text-right',
   },
 }
 

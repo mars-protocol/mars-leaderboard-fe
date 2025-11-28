@@ -1,13 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
 
 import Text from 'components/common/Text'
-import { truncate } from 'utils/formatters'
 
 export const WALLET_META: ColumnDef<FragmentLeaderboardEntry> = {
   id: 'wallet',
-  accessorKey: 'wallet',
   header: 'Wallet',
-  enableSorting: true,
   meta: {
     className: 'text-left',
   },
@@ -32,7 +29,6 @@ export default function Wallet(props: Props) {
   return (
     <Text size='sm' className='text-white/80 text-left'>
       {value.wallet}
-      {/* {truncate(value.wallet, [10, 8])} */}
     </Text>
   )
 }
