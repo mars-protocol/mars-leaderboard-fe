@@ -39,3 +39,14 @@ interface FragmentLeaderboardEntry {
   wallet: string
   total_fragments: string
 }
+
+interface FormatOptions {
+  minDecimals?: number
+  maxDecimals?: number
+  thousandSeparator?: boolean
+  decimals?: number
+  abbreviated?: boolean
+  rounded?: boolean
+  prefix?: string
+  suffix?: string
+}
