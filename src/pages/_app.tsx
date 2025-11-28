@@ -3,24 +3,29 @@ import { useEffect, useState } from 'react'
 
 import DefaultPageHead from 'components/common/DefaultPageHead'
 
-import 'react-toastify/dist/ReactToastify.min.css'
 import 'styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isClient, setIsClient] = useState(false)
   const PageComponent = Component as any
-  const [isServer, setIsServer] = useState(true)
 
   useEffect(() => {
-    setIsServer(false)
+    setIsClient(true)
   }, [])
-  if (isServer) return null
+
+  if (!isClient) {
+    return (
+      <>
+        <DefaultPageHead />
+        <div style={{ minHeight: '100vh' }} />
+      </>
+    )
+  }
 
   return (
     <>
       <DefaultPageHead />
-      <div suppressHydrationWarning>
-        {typeof window === 'undefined' ? null : <PageComponent {...pageProps} />}
-      </div>
+      <PageComponent {...pageProps} />
     </>
   )
 }

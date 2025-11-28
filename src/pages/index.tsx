@@ -1,11 +1,10 @@
-import { BrowserRouter } from 'react-router-dom'
+import MainPage from 'pages/MainPage'
+import Layout from 'pages/_layout'
 
-import Routes from 'components/header/navigation/Routes'
-
-export default function Router() {
+export default function Home() {
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Layout>
+      <MainPage />
+    </Layout>
   )
 }

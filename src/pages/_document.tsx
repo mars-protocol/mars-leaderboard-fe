@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html className='p-0 m-0 scrollbar-hide' lang='en'>
+    <Html className='p-0 m-0 scrollbar-hide' lang='en' data-theme='dark'>
       <Head>
         <script defer src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js' />
       </Head>

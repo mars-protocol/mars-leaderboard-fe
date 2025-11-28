@@ -1,7 +1,27 @@
 {
-  "name": "Mars Risk Dashboard",
-  "short_name": "Mars RD",
+  "name": "Mars Protocol Leaderboard",
+  "short_name": "Mars Leaderboard",
+  "description": "Mars Fragments leaderboard tracking on-chain participation across Mars-aligned products. View rankings, total fragments, and estimated MARS token rewards.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
@@ -12,8 +32,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  ]
 }

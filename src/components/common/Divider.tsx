@@ -1,18 +1,20 @@
 import classNames from 'classnames'
 
-interface Props {
-  orientation?: 'horizontal' | 'vertical'
+type DividerProps = {
+  width?: string
+  marginTop?: string
   className?: string
 }
 
-export default function Divider(props: Props) {
+export function Divider({ width = 'w-12', marginTop = 'md:mt-7', className = '' }: DividerProps) {
   return (
     <div
       className={classNames(
-        props.orientation === 'vertical' ? 'h-full w-[1px]' : 'h-[1px] w-full',
-        props.className,
-        'bg-white/10',
+        'relative z-10 hidden h-px shrink-0 bg-linear-to-r from-transparent via-white/40 to-transparent md:block',
+        width,
+        marginTop,
+        className,
       )}
-    ></div>
+    />
   )
 }

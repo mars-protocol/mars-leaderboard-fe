@@ -13,12 +13,9 @@ export default tseslint.config(
   eslintPluginPrettierRecommended,
 
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-  {    ignores: [
-    'src/utils/charting_library/*',
-    'src/utils/datafeeds/*',
-    'src/utils/health_computer/*',
-    'src/types/generated/**/*',
-  ]},
+  {
+    ignores: ['src/types/generated/**/*'],
+  },
   {
     languageOptions: {
       parserOptions: { ecmaFeatures: { jsx: true } },
@@ -26,8 +23,8 @@ export default tseslint.config(
   },
   {
     plugins: {
-      'react': eslintPluginReact,
-      'react-hooks': fixupPluginRules(eslintPluginReactHooks),
+      react: eslintPluginReact,
+      'react-hooks': eslintPluginReactHooks,
     },
   },
   {
@@ -52,7 +49,10 @@ export default tseslint.config(
           ignoreDeclarationSort: true,
         },
       ],
-
+      // Disable stricter react-hooks rules that conflict with Next.js patterns
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/purity': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
     },
   },
-);
+)
