@@ -142,6 +142,7 @@ export default function IntroRightColumn() {
             viewBox='0 0 500 500'
             className='w-full h-full'
             style={{ overflow: 'visible' }}
+            aria-hidden='true'
           >
             <defs>
               <linearGradient
@@ -306,8 +307,9 @@ export default function IntroRightColumn() {
             }}
             initial={{ y: 0, rotate: 0, scale: 1 }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className='w-40 h-40 md:w-126 md:h-126'
           >
-            <MarsFragments className='w-40 h-40 md:w-126 md:h-126' />
+            <MarsFragments />
           </motion.div>
         </div>
       </div>

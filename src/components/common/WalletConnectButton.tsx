@@ -63,7 +63,7 @@ export default function WalletConnectButton() {
             <button
               onClick={() => setShowModal(false)}
               className='absolute top-4 right-4 text-white/60 hover:text-white transition-colors'
-              aria-label='Close'
+              aria-label='Close wallet modal'
             >
               <Cross className='w-4 h-4' />
             </button>
@@ -90,6 +90,7 @@ export default function WalletConnectButton() {
                 onClick={handleViewOnExplorer}
                 className='flex-1 justify-center py-3'
                 leftIcon={<ExternalLink className='w-4 h-4' />}
+                aria-label='View wallet address on explorer'
               >
                 View on Explorer
               </Button>
@@ -113,6 +114,7 @@ export default function WalletConnectButton() {
       disabled={isWalletConnecting}
       className='disabled:opacity-50 disabled:cursor-not-allowed'
       leftIcon={<Wallet className='w-4 h-4' />}
+      aria-label={isWalletConnecting ? 'Connecting wallet' : 'Connect wallet'}
     >
       {isWalletConnecting ? 'Connecting...' : 'Connect Wallet'}
     </Button>
