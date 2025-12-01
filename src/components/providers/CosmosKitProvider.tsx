@@ -11,7 +11,8 @@ import { ChainProvider } from '@cosmos-kit/react'
 import { wallets as vectisWallets } from '@cosmos-kit/vectis'
 import { wallets as xdefiWallets } from '@cosmos-kit/xdefi'
 import '@interchain-ui/react/styles'
-import { assetLists } from 'chain-registry'
+// Import only the neutron asset list instead of all chains to reduce bundle size
+import { assetList as neutronAssetList } from 'chain-registry/mainnet/neutron'
 
 import chainConfig from 'config/chain'
 import { getCosmosKitTheme } from 'theme/cosmosKitTheme'
@@ -29,7 +30,7 @@ declare global {
 }
 
 const chainNames = [chainConfig.name]
-const chainAssets = assetLists.filter((asset) => asset.chainName === chainConfig.name)
+const chainAssets = [neutronAssetList]
 
 const wallets = [
   ...keplrWallets,

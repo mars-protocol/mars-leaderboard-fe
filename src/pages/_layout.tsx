@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import Footer from 'components/common/Footer'
 import Header from 'components/header/Header'
 import { CosmosKitProvider } from 'components/providers/CosmosKitProvider'
+import { Analytics } from '@vercel/analytics/next'
 
 function PageContainer({ children }: { children: React.ReactNode }) {
   return (
@@ -32,6 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </main>
         <Footer />
       </Suspense>
+      <Analytics />
     </CosmosKitProvider>
   )
 }

@@ -23,7 +23,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
   ref,
 ) {
   const baseStyles =
-    'flex items-center gap-2 px-4 py-2 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm transition-colors cursor-pointer'
+    'flex items-center gap-2 px-4 py-2 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 text-white text-sm transition-colors cursor-pointer focus:outline-none focus:ring-1 focus:ring-white/10 focus:ring-offset-1 focus:ring-offset-surface'
 
   if (href) {
     return (
